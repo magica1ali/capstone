@@ -286,7 +286,6 @@ def parse_clean_func(text_dict):
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
 
     #split text into sentences and add the document year to each sentence
-    @st.cache_data
     def spacyLayer(text,corpus):
         index_to_year = {}
 
@@ -309,7 +308,6 @@ def parse_clean_func(text_dict):
         for document in sentences_with_years:
             # Split the document into sentence text and year
             year, sentence_text = document.split(": ", 1)
- 
     # Parse the sentence using spaCy
         nlp = spacy.load("en_core_web_lg")
         doc = nlp(sentence_text)
@@ -323,7 +321,9 @@ def parse_clean_func(text_dict):
         filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
     
         return filtered_sentences
- 
+        
+filtered_sentences = spacyLayer(translated_text,corpus)
+ st.write(filtered_sentences[0])
     #Extracts timestamps for topics over time visulization
     @st.cache_data
     def datetime_layer(text):
@@ -347,8 +347,6 @@ def parse_clean_func(text_dict):
         timestamps = pd.to_datetime(timestamps)
     
         return timestamps
-    
-filtered_sentences = spacyLayer(translated_text,corpus)
 
 timestamps = datetime_layer(filtered_sentences)
 
@@ -468,12 +466,12 @@ def get_intertopic_dist_map(topic_model):
 
 fig1 = get_intertopic_dist_map(topic_model)
 st.write(fig1)
- 
+ """
 
 """def show_doc_info(topic_model,translated_text):
     document_info = topic_model.get_document_info(translated_text)
     st.write(document_info)
-    """
+    
 
 def prove_success_func(topic_model):
     if topic_model is not None:
