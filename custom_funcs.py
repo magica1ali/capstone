@@ -325,7 +325,7 @@ def parse_clean_func(text_dict):
 filtered_sentences = spacyLayer(translated_text,corpus)
 st.write(filtered_sentences[0])
     #Extracts timestamps for topics over time visulization
-    @st.cache_data
+@st.cache_data
     def datetime_layer(text):
           
         # Create a list of dictionaries with 'sentence' and 'date' attributes
