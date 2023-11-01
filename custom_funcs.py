@@ -286,7 +286,7 @@ def parse_clean_func(text_dict):
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
 
     #split text into sentences and add the document year to each sentence
-    @st.cache(suppress_st_warning=True)
+    @st.cache_resource
     def spacyLayer(text,corpus):
         index_to_year = {}
     
@@ -326,7 +326,7 @@ def parse_clean_func(text_dict):
         return filtered_sentences
  
     #Extracts timestamps for topics over time visulization
-    @st.cache(suppress_st_warning=True)
+    @st.cache_resource
     def datetime_layer(text):
           
         # Create a list of dictionaries with 'sentence' and 'date' attributes
@@ -356,7 +356,7 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus
-@st.cache(suppress_st_warning=True)
+@st.cache_resource
 def bertopic_model_text(timestamp_tex):
 
     # Step 1 - Extract embeddings
@@ -451,7 +451,7 @@ def plot_topics_over_time(topic_model, timestamps, translated_text):
     ax.legend(loc="upper right")
 
     # Display the plot in Streamlit
-    st.pyplot(fig)
+    st.write(fig)
  
 
 def show_doc_info(topic_model,translated_text):
