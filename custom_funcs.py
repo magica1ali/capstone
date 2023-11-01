@@ -443,7 +443,7 @@ def get_intertopic_dist_map(topic_model):
     return topic_model.visualize_topics()
 
 fig1 = get_intertopic_dist_map(topic_model)
-    st.write(fig1)
+st.write(fig1)
  
 
 """def show_doc_info(topic_model,translated_text):
