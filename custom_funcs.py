@@ -429,7 +429,6 @@ def bertopic_model_text(text):
 
 topic_model = bertopic_model_text(timestamp_text)
 
-return topic_model 
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, timestamp_tex):
