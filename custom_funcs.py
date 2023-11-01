@@ -357,7 +357,7 @@ def parse_clean_func(text_dict):
 
 #define function for BERTopic Modeling of Corpus
 @st.cache_resource
-def bertopic_model_text(timestamp_text):
+'''def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
@@ -400,8 +400,36 @@ def bertopic_model_text(timestamp_text):
     ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
+    return topic_model'''
 
-    return topic_model
+def bertopic_model_text(text):
+  #parameters for bertopic
+  embedding_model = SentenceTransformer("all-mpnet-base-v2")
+  umap_model = UMAP(n_neighbors=15, n_components=5, min_dist=0.0, metric='cosine')
+  hdbscan_model = HDBSCAN(min_cluster_size=15, metric='euclidean', cluster_selection_method='eom', prediction_data=True)
+  vectorizer_model = CountVectorizer(stop_words= stop_words)
+  ctfidf_model = ClassTfidfTransformer()
+  representation_model = KeyBERTInspired()
+
+  #load model with parameters
+  topic_model = BERTopic(
+  embedding_model=embedding_model,          # Step 1 - Extract embeddings
+  umap_model= umap_model,                    # Step 2 - Reduce dimensionality
+  hdbscan_model=hdbscan_model,              # Step 3 - Cluster reduced embeddings
+  vectorizer_model=vectorizer_model,        # Step 4 - Tokenize topics
+  ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
+  representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
+)
+  
+  #Fit Model to text
+  topics, probs = topic_model.fit_transform(text)
+  # Get the document information
+  document_info = topic_model.get_document_info(text)
+  return topic_model
+
+topic_model = bertopic_model_text(timestamp_text)
+
+return topic_model 
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, timestamp_tex):
