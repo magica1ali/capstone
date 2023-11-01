@@ -286,10 +286,10 @@ def parse_clean_func(text_dict):
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
 
     #split text into sentences and add the document year to each sentence
-    @st.cache_resource
+    @st.cache_data
     def spacyLayer(text,corpus):
         index_to_year = {}
-    
+
         for i in range(len(corpus)):
             index_to_year[i] = corpus.index[i]
     
@@ -301,8 +301,7 @@ def parse_clean_func(text_dict):
             year = index_to_year.get(index, None)
         if year is not None:
             sentences_with_years.append(f"{year}: {sentence}")
-
-    
+            
         # Initialize an empty list to store sentences with year appended
         sentences_with_years_appended = []
     
@@ -326,7 +325,7 @@ def parse_clean_func(text_dict):
         return filtered_sentences
  
     #Extracts timestamps for topics over time visulization
-    @st.cache_resource
+    @st.cache_data
     def datetime_layer(text):
           
         # Create a list of dictionaries with 'sentence' and 'date' attributes
@@ -349,9 +348,9 @@ def parse_clean_func(text_dict):
     
         return timestamps
     
-timestamp_text = spacyLayer(translated_text,corpus)
+filtered_sentences = spacyLayer(translated_text,corpus)
 
-timestamps = datetime_layer(timestamp_text)
+timestamps = datetime_layer(filtered_sentences)
 
 #define function for BERTopic Modeling of Corpus
 
@@ -425,7 +424,7 @@ def bertopic_model_text(text):
   document_info = topic_model.get_document_info(text)
   return topic_model
 
-topic_model = bertopic_model_text(timestamp_text)
+topic_model = bertopic_model_text(filtered_sentences)
 
 
 #THIS DOESNT WORK
