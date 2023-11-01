@@ -357,7 +357,7 @@ def parse_clean_func(text_dict):
 
 #define function for BERTopic Modeling of Corpus
 @st.cache_resource
-def bertopic_model_text(timestamp_tex):
+def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
@@ -404,9 +404,9 @@ def bertopic_model_text(timestamp_tex):
     return topic_model
 
 #THIS DOESNT WORK
-""" def topics_over_time_table(topic_model, timestamps, translated_text):
+""" def topics_over_time_table(topic_model, timestamps, timestamp_tex):
     # Calculate topics over time
-    topics_over_time = topic_model.topics_over_time(docs=translated_text,
+    topics_over_time = topic_model.topics_over_time(docs=timestamp_tex,
                                                 timestamps=timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
@@ -425,36 +425,21 @@ def bertopic_model_text(timestamp_tex):
     if start_idx < len(topics_over_time):
         st.table(topics_over_time[start_idx:end_idx])
     else:
-        st.write("No more data to display on this page.")
+        st.write("No more data to display on this page.") """
 
-def plot_topics_over_time(topic_model, timestamps, translated_text):
+def plot_topics_over_time(topic_model, timestamps, timestamp_text):
     # Calculate topics over time
-    topics_over_time = topic_model.topics_over_time(docs=translated_text,
+    topics_over_time = topic_model.topics_over_time(docs=timestamp_text,
                                                 timestamps=timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
                                                 nr_bins=15)
-    # Create a figure and axis for the plot
-    fig, ax = plt.subplots()
-
-    # Group topics by their 'Topic' column
-    topics_grouped = topics_over_time.groupby('Topic')
-
-    # Plot each topic's frequency over time
-    for topic, group in topics_grouped:
-        ax.plot(group['Timestamp'], group['frequency'], label=f"Topic {topic}")
-
-    # Customize the plot
-    ax.set_xlabel("Time")
-    ax.set_ylabel("Frequency")
-    ax.set_title("Topics Over Time")
-    ax.legend(loc="upper right")
-
     # Display the plot in Streamlit
+    fig = topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=7)
     st.write(fig)
  
 
-def show_doc_info(topic_model,translated_text):
+"""def show_doc_info(topic_model,translated_text):
     document_info = topic_model.get_document_info(translated_text)
     st.write(document_info)
     """
