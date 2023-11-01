@@ -356,8 +356,8 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus
-@st.cache_resource
-'''def bertopic_model_text(timestamp_text):
+
+"""def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
@@ -400,8 +400,8 @@ def parse_clean_func(text_dict):
     ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
-    return topic_model'''
-
+    return topic_model"""
+@st.cache_resource
 def bertopic_model_text(text):
   #parameters for bertopic
   embedding_model = SentenceTransformer("all-mpnet-base-v2")
