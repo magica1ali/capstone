@@ -427,7 +427,7 @@ def bertopic_model_text(timestamp_text):
     else:
         st.write("No more data to display on this page.") """
 
-def plot_topics_over_time(topic_model, timestamps, timestamp_text):
+'''def plot_topics_over_time(topic_model, timestamps, timestamp_text):
     # Calculate topics over time
     topics_over_time = topic_model.topics_over_time(docs=timestamp_text,
                                                 timestamps=timestamps,
@@ -436,7 +436,14 @@ def plot_topics_over_time(topic_model, timestamps, timestamp_text):
                                                 nr_bins=15)
     # Display the plot in Streamlit
     fig = topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=7)
-    st.write(fig)
+    st.write(fig)'''
+
+@st.cache_data
+def get_intertopic_dist_map(topic_model):
+    return topic_model.visualize_topics()
+
+fig1 = get_intertopic_dist_map(topic_model)
+    st.write(fig1)
  
 
 """def show_doc_info(topic_model,translated_text):
