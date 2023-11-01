@@ -323,7 +323,7 @@ def parse_clean_func(text_dict):
         return filtered_sentences
         
 filtered_sentences = spacyLayer(translated_text,corpus)
- st.write(filtered_sentences[0])
+st.write(filtered_sentences[0])
     #Extracts timestamps for topics over time visulization
     @st.cache_data
     def datetime_layer(text):
