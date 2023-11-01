@@ -3,6 +3,7 @@ import time
 import custom_funcs
 import nltk
 import spacy
+from bertopic import BERTopic
 import matplotlib.pyplot as plt
 
 def main():
