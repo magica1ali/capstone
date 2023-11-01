@@ -1,0 +1,15 @@
+streamlit==1.28.0
+pandas>=2.1.1
+nltk==3.8.1
+scikit-learn==1.2.2
+spacy==3.6.1
+Pillow==9.4.0
+PyMuPDF==1.23.5
+umap-learn==0.5.4
+hdbscan==0.8.33
+sentence-transformers==2.2.2
+matplotlib==3.7.1
+symspellpy==6.7.7
+BERTopic==0.15.0
+en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.6.0/en_core_web_lg-3.6.0-py3-none-any.whl#sha256=9012584a8fcf5bc61bedb13a4b511fb81ffff9f770958ee06366671be10632e9
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0-py3-none-any.whl#sha256=83276fc78a70045627144786b52e1f2728ad5e29e5e43916ec37ea9c26a11212
