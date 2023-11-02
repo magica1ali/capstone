@@ -354,6 +354,7 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
+@st.cache_resource
 def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
@@ -399,6 +400,11 @@ def bertopic_model_text(timestamp_text):
     )
 
     return topic_model
+    
+@st.cache_data
+def get_intertopic_dist_map(topic_model):
+    return topic_model.visualize_topics()
+
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, translated_text):
@@ -459,7 +465,8 @@ def show_doc_info(topic_model,translated_text):
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")
-        st.write(topic_model)
+        fig1 = get_intertopic_dist_map(topic_model)
+        st.write(fig1)
     else:
         raise ValueError('Topic model not found')
     
