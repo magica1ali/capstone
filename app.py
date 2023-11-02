@@ -35,7 +35,7 @@ def main():
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
 
                 strip_sentences = custom_funcs.spacyLayer(translated_text,corpus)
-                timestamps = custom_funcs.datetime_layer(filtered_sentences)
+                timestamps = custom_funcs.datetime_layer(strip_sentences)
                 st.write('Reccomendations text preprocessed!')
                 st.write(strip_sentences[0])
                 
