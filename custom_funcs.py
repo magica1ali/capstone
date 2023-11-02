@@ -397,8 +397,8 @@ def bertopic_model_text(timestamp_text):
     ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
-
-    return topic_model
+    topics, probs = topic_model.fit_transform(timestamp_text)
+    return topic_model, topics, probs
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, translated_text):
