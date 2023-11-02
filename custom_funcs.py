@@ -286,7 +286,7 @@ def parse_clean_func(text_dict):
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
 
     #split text into sentences and add the document year to each sentence
-    def spacyLayer(text,corpus):
+    def spacyLayer(translated_text,corpus):
         index_to_year = {}
     
         for i in range(len(corpus)):
@@ -296,7 +296,7 @@ def parse_clean_func(text_dict):
         sentences_with_years = []
     
         # Iterate through the sentences and rename the indices
-        for index, sentence in enumerate(text):
+        for index, sentence in enumerate(translated_text):
             year = index_to_year.get(index, None)
         if year is not None:
             sentences_with_years.append(f"{year}: {sentence}")
@@ -325,7 +325,7 @@ def parse_clean_func(text_dict):
         return filtered_sentences
  
     #Extracts timestamps for topics over time visulization
-    def datetime_layer(text):
+    def datetime_layer(filtered_sentences):
           
         # Create a list of dictionaries with 'sentence' and 'date' attributes
         sentences_with_dates = []
