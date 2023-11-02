@@ -15,6 +15,7 @@ from umap import UMAP
 from hdbscan import HDBSCAN
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import CountVectorizer
+import bertopic
 from bertopic import BERTopic
 from bertopic.representation import KeyBERTInspired
 from bertopic.vectorizers import ClassTfidfTransformer
@@ -354,7 +355,7 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
-@st.cache_resource
+@st.cache_data
 def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
@@ -398,13 +399,16 @@ def bertopic_model_text(timestamp_text):
     ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
+    topics, probs = topic_model.fit_transform(timestamp_text)
 
-    return topic_model
+    return topic_model,topics, probs
     
 @st.cache_data
 def get_intertopic_dist_map(topic_model):
     return topic_model.visualize_topics()
-
+    
+fig1 = get_intertopic_dist_map(topic_model)
+st.write(fig1)
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, translated_text):
@@ -465,8 +469,6 @@ def show_doc_info(topic_model,translated_text):
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")
-        fig1 = get_intertopic_dist_map(topic_model)
-        st.write(fig1)
     else:
         raise ValueError('Topic model not found')
     
