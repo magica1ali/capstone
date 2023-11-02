@@ -284,7 +284,7 @@ def parse_clean_func(text_dict):
         return replaced_text
    
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
-    return translated_text
+    return translated_text,corpus 
 
 #split text into sentences and add the document year to each sentence
 def spacyLayer(text,corpus):
