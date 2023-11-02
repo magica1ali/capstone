@@ -43,7 +43,7 @@ def main():
                 
                 st.write('Instantiating BERTopic Model...')
                 # Function to instantiate BERTopic Model
-                topic_model = custom_funcs.bertopic_model_text(filtered_sentences)
+                topic_model,topics, probs = custom_funcs.bertopic_model_text(filtered_sentences)
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
