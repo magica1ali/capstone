@@ -285,42 +285,42 @@ def parse_clean_func(text_dict):
    
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
 
-    #split text into sentences and add the document year to each sentence
-    def spacyLayer(text,corpus):
-        index_to_year = {}
+#split text into sentences and add the document year to each sentence
+def spacyLayer(text,corpus):
+    index_to_year = {}
 
-        for i in range(len(corpus)):
-            index_to_year[i] = corpus.index[i]
+    for i in range(len(corpus)):
+        index_to_year[i] = corpus.index[i]
     
-        # Create a new list to store sentences with updated indices
-        sentences_with_years = []
+    # Create a new list to store sentences with updated indices
+    sentences_with_years = []
     
-        # Iterate through the sentences and rename the indices
-        for index, sentence in enumerate(text):
-            year = index_to_year.get(index, None)
-        if year is not None:
-            sentences_with_years.append(f"{year}: {sentence}")
+    # Iterate through the sentences and rename the indices
+    for index, sentence in enumerate(text):
+        year = index_to_year.get(index, None)
+    if year is not None:
+        sentences_with_years.append(f"{year}: {sentence}")
             
-        # Initialize an empty list to store sentences with year appended
+    # Initialize an empty list to store sentences with year appended
         sentences_with_years_appended = []
     
-        # Iterate through each document in sentences_with_years
-        for document in sentences_with_years:
-            # Split the document into sentence text and year
-            year, sentence_text = document.split(": ", 1)
+    # Iterate through each document in sentences_with_years
+    for document in sentences_with_years:
+    # Split the document into sentence text and year
+        year, sentence_text = document.split(": ", 1)
     # Parse the sentence using spaCy
         nlp = spacy.load("en_core_web_lg")
         doc = nlp(sentence_text)
     
-        # Iterate through each sentence in the document
-        for sentence in doc.sents:
-            # Append the sentence with year appended
-            sentence_with_year = f"{sentence.text} ({year})"
-            sentences_with_years_appended.append(sentence_with_year)
+    # Iterate through each sentence in the document
+    for sentence in doc.sents:
+        # Append the sentence with year appended
+        sentence_with_year = f"{sentence.text} ({year})"
+        sentences_with_years_appended.append(sentence_with_year)
         
-        filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
+    filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
     
-        return filtered_sentences
+    return filtered_sentences
         
 filtered_sentences = spacyLayer(translated_text,corpus)
 st.write(filtered_sentences[0])
