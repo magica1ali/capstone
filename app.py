@@ -45,7 +45,7 @@ def main():
                 time.sleep(1)
                 
                 st.write('Fitting data to model and extracting topics...')
-                topics, probs = topic_model.fit_transform(timestamp_text)
+                topics, probs = custom_funcs.topic_model.fit_transform(timestamp_text)
                 st.write('Model fitted!')
                 
                 time.sleep(1)
