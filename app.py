@@ -34,6 +34,7 @@ def main():
                 # Function to parse out the recommendations section, clean, and preprocess corpus
                 timestamp_text, timestamps, translated_text = custom_funcs.parse_clean_func(text_dict)
                 st.write('Reccomendations text preprocessed!')
+                st.write(timestamp_text[0])
                 
                 time.sleep(1)
                 
@@ -45,7 +46,7 @@ def main():
                 time.sleep(1)
                 
                 st.write('Fitting data to model and extracting topics...')
-                topics, probs = topic_model.fit_transform(timestamp_text)
+                topics, probs = custom_funcs.topic_model.fit_transform(timestamp_text)
                 st.write('Model fitted!')
                 
                 time.sleep(1)
