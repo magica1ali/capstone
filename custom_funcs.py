@@ -348,6 +348,10 @@ def parse_clean_func(text_dict):
     
         return timestamps
 
+    timestamp_text = spacyLayer(translated_text,corpus)
+
+    timestamps = datetime_layer(timestamp_text)
+
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
