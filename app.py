@@ -34,16 +34,16 @@ def main():
                 # Function to parse out the recommendations section, clean, and preprocess corpus
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
 
-                strip_sentences = custom_funcs.spacyLayer(translated_text,corpus)
-                timestamps = custom_funcs.datetime_layer(strip_sentences)
+                filtered_sentences = custom_funcs.spacyLayer(translated_text,corpus)
+                timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 st.write('Reccomendations text preprocessed!')
-                st.write(translated_text[0])
+                st.write(filtered_sentences[0])
                 
                 time.sleep(1)
                 
                 st.write('Instantiating BERTopic Model...')
                 # Function to instantiate BERTopic Model
-                topic_model,topics, probs = custom_funcs.bertopic_model_text(strip_sentences)
+                topic_model,topics, probs = custom_funcs.bertopic_model_text(filtered_sentences)
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
