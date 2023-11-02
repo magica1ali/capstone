@@ -32,21 +32,24 @@ def main():
 
                 st.write('Parsing, spell-checking, and preprocessing recommendations text from PDFs...')
                 # Function to parse out the recommendations section, clean, and preprocess corpus
-                timestamp_text, timestamps, translated_text = custom_funcs.parse_clean_func(text_dict)
+                translated_text = custom_funcs.parse_clean_func(text_dict)
+
+                filtered_sentences = custom_funcs.spacyLayer(translated_text,corpus)
+                timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 st.write('Reccomendations text preprocessed!')
-                st.write(timestamp_text[0])
+                st.write(filtered_sentences[0])
                 
                 time.sleep(1)
                 
                 st.write('Instantiating BERTopic Model...')
                 # Function to instantiate BERTopic Model
-                topic_model = custom_funcs.bertopic_model_text(timestamp_text)
+                topic_model = custom_funcs.bertopic_model_text(filtered_sentences)
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
                 
                 st.write('Fitting data to model and extracting topics...')
-                topics, probs = custom_funcs.topic_model.fit_transform(timestamp_text)
+                topics, probs = custom_funcs.topic_model.fit_transform(filtered_sentences)
                 st.write('Model fitted!')
                 
                 time.sleep(1)
