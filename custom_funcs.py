@@ -330,7 +330,7 @@ def parse_clean_func(text_dict):
         # Create a list of dictionaries with 'sentence' and 'date' attributes
         sentences_with_dates = []
     
-        for sentence in text:
+        for sentence in filtered_sentences:
             year_pattern = r'(\d{4}) ACWV Report'
             matches = re.search(year_pattern, sentence)
             
@@ -346,10 +346,6 @@ def parse_clean_func(text_dict):
         timestamps = pd.to_datetime(timestamps)
     
         return timestamps
-    
-    timestamp_text = spacyLayer(translated_text,corpus)
-
-    timestamps = datetime_layer(timestamp_text)
 
     return timestamp_text,timestamps,translated_text
 
