@@ -400,6 +400,7 @@ def bertopic_model_text(timestamp_text):
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
     topics, probs = topic_model.fit_transform(timestamp_text)
+        return topic_model
 
     @st.cache_data
     def get_intertopic_dist_map(topic_model):
