@@ -403,7 +403,7 @@ def bertopic_model_text(timestamp_text):
 
     @st.cache_data
     def get_intertopic_dist_map(topic_model):
-    return topic_model.visualize_topics()
+        return topic_model.visualize_topics()
     
     fig1 = get_intertopic_dist_map(topic_model)
 
