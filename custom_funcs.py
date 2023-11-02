@@ -465,11 +465,11 @@ def get_intertopic_dist_map(topic_model):
 
 fig1 = get_intertopic_dist_map(topic_model)
 st.write(fig1)
- """
+ 
 
 """def show_doc_info(topic_model,translated_text):
     document_info = topic_model.get_document_info(translated_text)
-    st.write(document_info)
+    st.write(document_info)"""
     
 
 def prove_success_func(topic_model):
