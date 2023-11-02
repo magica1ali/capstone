@@ -48,14 +48,15 @@ def main():
                 
                 time.sleep(1)
                 
-                st.write('Fitting data to model and extracting topics...')
-                topics, probs = custom_funcs.topic_model.fit_transform(filtered_sentences)
-                st.write('Model fitted!')
+                #st.write('Fitting data to model and extracting topics...')
+                #topics, probs = custom_funcs.topic_model.fit_transform(filtered_sentences)
+                #st.write('Model fitted!')
                 
                 time.sleep(1)
                 
                 st.write('Creating Visualizations...')
-                # custom_funcs.topics_over_time_table(topic_model, translated_text, timestamps)
+                fig1 = custom_funcs.get_intertopic_dist_map(topic_model)
+                st.write(fig1)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
                 
