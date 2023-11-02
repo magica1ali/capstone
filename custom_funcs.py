@@ -355,7 +355,7 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
-@st.cache_data
+
 def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
