@@ -21,7 +21,7 @@ from bertopic.vectorizers import ClassTfidfTransformer
 import pkg_resources
 from symspellpy import SymSpell
 import matplotlib.pyplot as plt
-@st.cache_resource
+
 def setup_func():
     with st.spinner("Downloading resources..."):
         try:
