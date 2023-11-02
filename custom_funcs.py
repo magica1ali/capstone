@@ -284,73 +284,73 @@ def parse_clean_func(text_dict):
         return replaced_text
    
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
+return translated_text
 
-    #split text into sentences and add the document year to each sentence
-    def spacyLayer(translated_text,corpus):
-        index_to_year = {}
+#split text into sentences and add the document year to each sentence
+def spacyLayer(text,corpus):
+    index_to_year = {}
     
-        for i in range(len(corpus)):
-            index_to_year[i] = corpus.index[i]
+    for i in range(len(corpus)):
+        index_to_year[i] = corpus.index[i]
     
-        # Create a new list to store sentences with updated indices
-        sentences_with_years = []
+    # Create a new list to store sentences with updated indices
+    sentences_with_years = []
     
-        # Iterate through the sentences and rename the indices
-        for index, sentence in enumerate(translated_text):
-            year = index_to_year.get(index, None)
-        if year is not None:
-            sentences_with_years.append(f"{year}: {sentence}")
+    # Iterate through the sentences and rename the indices
+    for index, sentence in enumerate(text):
+        year = index_to_year.get(index, None)
+    if year is not None:
+        sentences_with_years.append(f"{year}: {sentence}")
 
+    # Initialize an empty list to store sentences with year appended
+    sentences_with_years_appended = []
     
-        # Initialize an empty list to store sentences with year appended
-        sentences_with_years_appended = []
-    
-        # Iterate through each document in sentences_with_years
-        for document in sentences_with_years:
-            # Split the document into sentence text and year
-            year, sentence_text = document.split(": ", 1)
+    # Iterate through each document in sentences_with_years
+    for document in sentences_with_years:
+        # Split the document into sentence text and year
+        year, sentence_text = document.split(": ", 1)
  
     # Parse the sentence using spaCy
-        nlp = spacy.load("en_core_web_lg")
-        doc = nlp(sentence_text)
+    nlp = spacy.load("en_core_web_lg")
+    doc = nlp(sentence_text)
     
-        # Iterate through each sentence in the document
-        for sentence in doc.sents:
-            # Append the sentence with year appended
-            sentence_with_year = f"{sentence.text} ({year})"
-            sentences_with_years_appended.append(sentence_with_year)
+    # Iterate through each sentence in the document
+    for sentence in doc.sents:
+        # Append the sentence with year appended
+        sentence_with_year = f"{sentence.text} ({year})"
+        sentences_with_years_appended.append(sentence_with_year)
         
-        filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
+    filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
     
-        return filtered_sentences
+    return filtered_sentences
  
-    #Extracts timestamps for topics over time visulization
-    def datetime_layer(filtered_sentences):
+#Extracts timestamps for topics over time visulization
+def datetime_layer(text):
           
-        # Create a list of dictionaries with 'sentence' and 'date' attributes
-        sentences_with_dates = []
+    # Create a list of dictionaries with 'sentence' and 'date' attributes
+    sentences_with_dates = []
     
-        for sentence in filtered_sentences:
-            year_pattern = r'(\d{4}) ACWV Report'
-            matches = re.search(year_pattern, sentence)
+    for sentence in filtered_sentences:
+        year_pattern = r'(\d{4}) ACWV Report'
+        matches = re.search(year_pattern, sentence)
             
-            if matches:
-                year = int(matches.group(1))
-                date_obj = datetime.date(year=year, month=1, day=1)
-                sentences_with_dates.append({'sentence': sentence, 'date': date_obj})
-            else:
-                sentences_with_dates.append({'sentence': sentence, 'date': None})
+        if matches:
+            year = int(matches.group(1))
+            date_obj = datetime.date(year=year, month=1, day=1)
+            sentences_with_dates.append({'sentence': sentence, 'date': date_obj})
+        else:
+            sentences_with_dates.append({'sentence': sentence, 'date': None})
         
-        timestamps = [item['date'] for item in sentences_with_dates]
+    timestamps = [item['date'] for item in sentences_with_dates]
 
-        timestamps = pd.to_datetime(timestamps)
+    timestamps = pd.to_datetime(timestamps)
     
-        return timestamps
+    return timestamps
 
-    return timestamp_text,timestamps,translated_text
+    
 
 #define function for BERTopic Modeling of Corpus  
-def bertopic_model_text(timestamp_text):
+def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
@@ -393,7 +393,7 @@ def bertopic_model_text(timestamp_text):
     ctfidf_model=ctfidf_model,                # Step 5 - Extract topic words
     representation_model=representation_model # Step 6 - (Optional) Fine-tune topic represenations
     )
-    topics, probs = topic_model.fit_transform(timestamp_text)
+    topics, probs = topic_model.fit_transform(text)
     return topic_model, topics, probs
 
 #THIS DOESNT WORK
