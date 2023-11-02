@@ -401,13 +401,15 @@ def bertopic_model_text(timestamp_text):
     )
     topics, probs = topic_model.fit_transform(timestamp_text)
 
-    return topic_model,topics, probs
-    
-@st.cache_data
-def get_intertopic_dist_map(topic_model):
+    @st.cache_data
+    def get_intertopic_dist_map(topic_model):
     return topic_model.visualize_topics()
     
-fig1 = get_intertopic_dist_map(topic_model)
+    fig1 = get_intertopic_dist_map(topic_model)
+
+    return topic_model,topics, probs
+    
+
 st.write(fig1)
 
 #THIS DOESNT WORK
