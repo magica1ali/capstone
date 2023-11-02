@@ -347,16 +347,12 @@ def parse_clean_func(text_dict):
         timestamps = pd.to_datetime(timestamps)
     
         return timestamps
-    
-    timestamp_text = spacyLayer(translated_text,corpus)
-
-    timestamps = datetime_layer(timestamp_text)
 
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
 
-def bertopic_model_text(timestamp_text):
+def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
