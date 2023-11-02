@@ -354,7 +354,7 @@ def parse_clean_func(text_dict):
     return timestamp_text,timestamps,translated_text
 
 #define function for BERTopic Modeling of Corpus  
-def bertopic_model_text(timestamp_tex):
+def bertopic_model_text(timestamp_text):
 
     # Step 1 - Extract embeddings
     embedding_model = SentenceTransformer("all-mpnet-base-v2")    
