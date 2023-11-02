@@ -330,7 +330,7 @@ def datetime_layer(text):
     # Create a list of dictionaries with 'sentence' and 'date' attributes
     sentences_with_dates = []
     
-    for sentence in filtered_sentences:
+    for sentence in text:
         year_pattern = r'(\d{4}) ACWV Report'
         matches = re.search(year_pattern, sentence)
             
