@@ -322,7 +322,7 @@ def append_years(sentences):
         sentence_with_year = f"{sentence.text} ({year})"
         sentences_with_years_appended.append(sentence_with_year)
         
-    filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 50]
+    filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 15]
     
     return filtered_sentences
  
