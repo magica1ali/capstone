@@ -301,12 +301,14 @@ def spacyLayer(text,corpus):
         year = index_to_year.get(index, None)
     if year is not None:
         sentences_with_years.append(f"{year}: {sentence}")
-
+    return sentences_with_years
+    
+def append_years(text)
     # Initialize an empty list to store sentences with year appended
     sentences_with_years_appended = []
     
     # Iterate through each document in sentences_with_years
-    for document in sentences_with_years:
+    for document in text:
         # Split the document into sentence text and year
         year, sentence_text = document.split(": ", 1)
  
