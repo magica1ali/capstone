@@ -351,7 +351,8 @@ def datetime_layer(text):
 
     
 
-#define function for BERTopic Modeling of Corpus  
+#define function for BERTopic Modeling of Corpus 
+@st.cache_data
 def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
