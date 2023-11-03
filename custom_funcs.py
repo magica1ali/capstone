@@ -206,19 +206,19 @@ def parse_clean_func(text_dict):
 
    # file_path = "./data/words_dict.csv"
 
-    #words_dict = {}
+    words_dict = {}
 
-   # with open(file_path, 'r', encoding='utf-8', errors='replace') as csv_file:
-       # csv_reader = csv.DictReader(csv_file)  # Use DictReader to read rows as dictionaries
+    with open(file_path, 'r', encoding='utf-8', errors='replace') as csv_file:
+        csv_reader = csv.DictReader(csv_file)  # Use DictReader to read rows as dictionaries
 
-        #for row in csv_reader:
+        for row in csv_reader:
             # Assuming the CSV file has 'Title' and 'Meaning' columns
-            #title = row['Title']
-            #meaning = row['Meaning']
-            #words_dict[title] = meaning  # Add the data to the dictionary
+            title = row['Title']
+            meaning = row['Meaning']
+            words_dict[title] = meaning  # Add the data to the dictionary
 
     # Convert word dict dataframe to dictionary
-   # words_dict = {key.lower(): value for key, value in words_dict.items()}
+       words_dict = {key.lower(): value for key, value in words_dict.items()}
 
     preprocessed_text = []  # Continue with your code as needed
 
