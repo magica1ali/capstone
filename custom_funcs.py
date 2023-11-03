@@ -399,9 +399,18 @@ def bertopic_model_text(text):
     topics, probs = topic_model.fit_transform(text)
     return topic_model, topics, probs
     
-@st.cache_data
-def get_intertopic_dist_map(_topic_model):
-    return _topic_model.visualize_topics()
+def visualize_hierarchy(self,
+                        orientation: str = "left",
+                        topics: List[int] = None,
+                        top_n_topics: int = None,
+                        custom_labels: bool = False,
+                        title: str = "<b>Hierarchical Clustering</b>",
+                        width: int = 1000,
+                        height: int = 600,
+                        hierarchical_topics: pd.DataFrame = None,
+                        linkage_function: Callable[[csr_matrix], np.ndarray] = None,
+                        distance_function: Callable[[csr_matrix], csr_matrix] = None,
+                        color_threshold: int = 1)
 
 
 #THIS DOESNT WORK
