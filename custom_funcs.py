@@ -287,7 +287,6 @@ def parse_clean_func(text_dict):
     return corpus,translated_text 
 
 #split text into sentences and add the document year to each sentence
-@st.cache_data
 def spacyLayer(text,corpus):
     index_to_year = {}
     
@@ -326,7 +325,6 @@ def spacyLayer(text,corpus):
     return filtered_sentences
  
 #Extracts timestamps for topics over time visulization
-@st.cache_data
 def datetime_layer(text):
           
     # Create a list of dictionaries with 'sentence' and 'date' attributes
