@@ -242,8 +242,8 @@ def parse_clean_func(text_dict):
         words = [word for word in words if word not in stop_words]
 
         # Lemmatization
-        lemmatizer = WordNetLemmatizer()
-        words = [lemmatizer.lemmatize(word) for word in words]
+        #lemmatizer = WordNetLemmatizer()
+        #words = [lemmatizer.lemmatize(word) for word in words]
 
         # Rejoin the processed words into a single text
         processed_text = " ".join(words)
@@ -398,11 +398,6 @@ def bertopic_model_text(text):
     topics, probs = topic_model.fit_transform(text)
     return topic_model, topics, probs
 
-def get_intertopic_dist_map(topic_model):
-    return topic_model.visualize_topics()
-    
-def get_topic_keyword_barcharts(topic_model):
-    return topic_model.visualize_barchart(top_n_topics=9, n_words=5, height=800)
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, translated_text):
