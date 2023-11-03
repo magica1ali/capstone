@@ -218,7 +218,7 @@ def parse_clean_func(text_dict):
             words_dict[title] = meaning  # Add the data to the dictionary
 
     # Convert word dict dataframe to dictionary
-       words_dict = {key.lower(): value for key, value in words_dict.items()}
+    words_dict = {key.lower(): value for key, value in words_dict.items()}
 
     preprocessed_text = []  # Continue with your code as needed
 
