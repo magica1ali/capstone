@@ -40,6 +40,7 @@ def main():
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 st.write('Reccomendations text preprocessed!')
                 st.write(len(filtered_sentences))
+                st.write(filtered_sentences[0])
                 
                 time.sleep(1)
                 
@@ -57,8 +58,6 @@ def main():
                 time.sleep(1)
                 
                 st.write('Creating Visualizations...')
-                document_info = topic_model.get_document_info(filtered_sentences)
-                st.write(document_info)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
                 
