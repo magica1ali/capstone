@@ -204,7 +204,7 @@ def parse_clean_func(text_dict):
         #cleaned_document = remove_words_and_patterns(recommendations, words_to_remove, patterns_to_remove)
         #cleaned_document = remove_words_and_patterns(original_text, words_to_remove, patterns_to_remove)
 
-   # file_path = "./data/words_dict.csv"
+    file_path = "./data/words_dict.csv"
 
     words_dict = {}
 
