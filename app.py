@@ -55,6 +55,8 @@ def main():
                 time.sleep(1)
                 
                 st.write('Creating Visualizations...')
+                figure1 = custom_funcs.get_intertopic_dist_map(topic_model)
+                st.write(figure1)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
                 
