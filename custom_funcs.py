@@ -353,7 +353,7 @@ def datetime_layer(text):
 def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
-    embedding_model = SentenceTransformer("all-mpnet-base-v2")    
+    #embedding_model = SentenceTransformer("all-mpnet-base-v2")    
 
     # Step 2 - Dimensionality Reduction
 
@@ -386,7 +386,7 @@ def bertopic_model_text(text):
 
     # All steps together
     topic_model = BERTopic(
-    embedding_model=embedding_model,          # Step 1 - Extract embeddings
+    #embedding_model=embedding_model,          # Step 1 - Extract embeddings
     umap_model= umap_model,                    # Step 2 - Reduce dimensionality
     hdbscan_model=hdbscan_model,              # Step 3 - Cluster reduced embeddings
     vectorizer_model=vectorizer_model,        # Step 4 - Tokenize topics
