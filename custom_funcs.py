@@ -398,31 +398,7 @@ def bertopic_model_text(text):
     topics, probs = topic_model.fit_transform(text)
     return topic_model, topics, probs
     
-def visualize_hierarchy(self,
-                        orientation: str = "left",
-                        topics: List[int] = None,
-                        top_n_topics: int = None,
-                        custom_labels: bool = False,
-                        title: str = "<b>Hierarchical Clustering</b>",
-                        width: int = 1000,
-                        height: int = 600,
-                        hierarchical_topics: pd.DataFrame = None,
-                        linkage_function: Callable[[csr_matrix], np.ndarray] = None,
-                        distance_function: Callable[[csr_matrix], csr_matrix] = None,
-                        color_threshold: int = 1)
-    return plotting.visualize_hierarchy(self,
-                                        orientation=orientation,
-                                        topics=topics,
-                                        top_n_topics=top_n_topics,
-                                        custom_labels=custom_labels,
-                                        title=title,
-                                        width=width,
-                                        height=height,
-                                        hierarchical_topics=hierarchical_topics,
-                                        linkage_function=linkage_function,
-                                        distance_function=distance_function,
-                                        color_threshold=color_threshold
-                                        )
+
 
 
 #THIS DOESNT WORK
