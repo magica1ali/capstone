@@ -400,7 +400,7 @@ def bertopic_model_text(text):
     return topic_model, topics, probs
     
 @st.cache_data
-def get_intertopic_dist_map(topic_model):
+def get_intertopic_dist_map(_topic_model):
     return topic_model.visualize_topics()
 
 
