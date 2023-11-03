@@ -56,7 +56,8 @@ def main():
                 
                 st.write('Creating Visualizations...')
                 fig1 = custom_funcs.get_intertopic_dist_map(topic_model)
-                st.write(fig1)
+                fig2 = custom_funcs.def get_topic_keyword_barcharts(topic_model)
+                st.write(fig2)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
                 
