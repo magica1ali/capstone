@@ -303,7 +303,7 @@ def spacyLayer(text,corpus):
         sentences_with_years.append(f"{year}: {sentence}")
     return sentences_with_years
     
-def append_years(text)
+def append_years(text):
     # Initialize an empty list to store sentences with year appended
     sentences_with_years_appended = []
     
