@@ -401,7 +401,7 @@ def bertopic_model_text(text):
     
 @st.cache_data
 def get_intertopic_dist_map(_topic_model):
-    return topic_model.visualize_topics()
+    return _topic_model.visualize_topics()
 
 
 #THIS DOESNT WORK
