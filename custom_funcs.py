@@ -352,7 +352,6 @@ def datetime_layer(text):
     
 
 #define function for BERTopic Modeling of Corpus 
-@st.cache_data
 def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
@@ -411,6 +410,19 @@ def visualize_hierarchy(self,
                         linkage_function: Callable[[csr_matrix], np.ndarray] = None,
                         distance_function: Callable[[csr_matrix], csr_matrix] = None,
                         color_threshold: int = 1)
+    return plotting.visualize_hierarchy(self,
+                                        orientation=orientation,
+                                        topics=topics,
+                                        top_n_topics=top_n_topics,
+                                        custom_labels=custom_labels,
+                                        title=title,
+                                        width=width,
+                                        height=height,
+                                        hierarchical_topics=hierarchical_topics,
+                                        linkage_function=linkage_function,
+                                        distance_function=distance_function,
+                                        color_threshold=color_threshold
+                                        )
 
 
 #THIS DOESNT WORK
