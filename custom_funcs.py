@@ -399,6 +399,9 @@ def bertopic_model_text(text):
     topics, probs = topic_model.fit_transform(text)
     return topic_model, topics, probs
 
+def get_intertopic_dist_map(topic_model):
+    return topic_model.visualize_topics()
+
 
 #THIS DOESNT WORK
 """ def topics_over_time_table(topic_model, timestamps, translated_text):
