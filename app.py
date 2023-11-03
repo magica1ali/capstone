@@ -46,19 +46,19 @@ def main():
                 
                 st.write('Instantiating BERTopic Model...')
                 # Function to instantiate BERTopic Model
-                topic_model,topics, probs = custom_funcs.bertopic_model_text(filtered_sentences)
+                topic_model = BERTopic.load(magica1/saxa3-capstone)
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
                 
                 #st.write('Fitting data to model and extracting topics...')
-                #topics, probs = custom_funcs.topic_model.fit_transform(filtered_sentences)
+                topics, probs = topic_model.transform(filtered_sentences)
                 #st.write('Model fitted!')
                 
                 time.sleep(1)
                 
                 st.write('Creating Visualizations...')
-                fig1 = custom_funcs.topic_model.visualize_hierarchy()
+                fig1 = topic_model.visualize_hierarchy()
                 st.write(fig1)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
