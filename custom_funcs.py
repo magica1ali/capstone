@@ -350,7 +350,6 @@ def datetime_layer(text):
     
 
 #define function for BERTopic Modeling of Corpus  
-@st.cache_resource 
 def bertopic_model_text(text):
 
     # Step 1 - Extract embeddings
@@ -387,7 +386,7 @@ def bertopic_model_text(text):
 
     # All steps together
     topic_model = BERTopic(
-    embedding_model=embedding_model,          # Step 1 - Extract embeddings
+    #embedding_model=embedding_model,          # Step 1 - Extract embeddings
     umap_model= umap_model,                    # Step 2 - Reduce dimensionality
     hdbscan_model=hdbscan_model,              # Step 3 - Cluster reduced embeddings
     vectorizer_model=vectorizer_model,        # Step 4 - Tokenize topics
