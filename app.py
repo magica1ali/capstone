@@ -55,8 +55,8 @@ def main():
                 time.sleep(1)
                 
                 st.write('Creating Visualizations...')
-                figure1 = topic_model.visualize_topics()
-                st.write(figure1)
+                document_info = topic_model.get_document_info(filtered_sentences)
+                st.write(document_info)
                 # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
                 # custom_funcs.show_doc_info(topic_model, translated_text)
                 
