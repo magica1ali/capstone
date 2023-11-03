@@ -38,7 +38,7 @@ def main():
                 filtered_sentences = custom_funcs.append_years(text_year)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 st.write('Reccomendations text preprocessed!')
-                st.write(filtered_sentences[7])
+                st.write(print(len(filtered_sentences))
                 
                 time.sleep(1)
                 
