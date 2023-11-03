@@ -228,8 +228,8 @@ def parse_clean_func(text_dict):
         text = text.lower()
 
         # Remove punctuation
-        my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
-        text = text.translate(str.maketrans("", "", my_punctuation))
+        #my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
+        #text = text.translate(str.maketrans("", "", my_punctuation))
 
         # Replace hyphens with spaces
         text = text.replace("-", " ")
