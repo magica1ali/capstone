@@ -34,7 +34,8 @@ def main():
                 # Function to parse out the recommendations section, clean, and preprocess corpus
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
 
-                filtered_sentences = custom_funcs.spacyLayer(translated_text,corpus)
+                text_year = custom_funcs.spacyLayer(translated_text,corpus)
+                filtered_sentences = custom_funcs.append_years(text_year)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 st.write('Reccomendations text preprocessed!')
                 st.write(filtered_sentences[7])
