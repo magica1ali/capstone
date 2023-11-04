@@ -27,19 +27,19 @@ def main():
 
                 st.write("Ingesting PDFs...")
                 text_dict = custom_funcs.process_pdfs(uploaded_files)
-                st.write('PDFs ingested!')
+                num_pdfs_ingested = len(text_dict)
+                st.write(f'{num_pdfs_ingested} PDF(s) ingested!')
 
                 time.sleep(1)
 
                 st.write('Parsing, spell-checking, and preprocessing recommendations text from PDFs...')
                 # Function to parse out the recommendations section, clean, and preprocess corpus
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
-                st.write(len(translated_text))
-
                 text_year = custom_funcs.spacyLayer(translated_text,corpus)
                 filtered_sentences = custom_funcs.append_years(text_year)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
-                st.write('Reccomendations text preprocessed!')
+                num_reccomendations_processed = st.write(len(translated_text))
+                st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 st.write(len(filtered_sentences))
                 st.write(filtered_sentences[0])
                 
@@ -68,6 +68,8 @@ def main():
             st.write(fig1) # Hierarchy Chart
             fig2 = topic_model.visualize_topics()
             st.write(fig2)
+            fig3 = topic_model.visualize_barchart()
+            st.write(fig3)
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
             # custom_funcs.show_doc_info(topic_model, translated_text)
             custom_funcs.prove_success_func(topic_model)
