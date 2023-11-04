@@ -38,7 +38,7 @@ def main():
                 text_year = custom_funcs.spacyLayer(translated_text,corpus)
                 filtered_sentences = custom_funcs.append_years(text_year)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
-                num_reccomendations_processed = st.write(len(len(filtered_sentences)))
+                num_reccomendations_processed = st.write(len(filtered_sentences))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
                 time.sleep(1)
