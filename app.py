@@ -46,7 +46,7 @@ def main():
                 
                 st.write('Instantiating BERTopic Model...')
                 # Function to instantiate BERTopic Model
-                topic_model = BERTopic.load(magica1/saxa3-capstone)
+                topic_model = BERTopic.load("magica1/saxa3-capstone")
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
