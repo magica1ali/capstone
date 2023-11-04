@@ -358,6 +358,26 @@ def datetime_layer(text):
     
     return timestamps
 
+def generate_visualizations_func(topic_model, timestamps, translated_text):
+    fig3 = topic_model.visualize_barchart()
+    st.write(fig3)    
+    fig1 = topic_model.visualize_hierarchy()
+    st.write(fig1) # Hierarchy Chart
+    fig2 = topic_model.visualize_topics()
+    st.write(fig2)
+
+    topics, probs = topic_model.fit_transform(translated_text)
+    topics_over_time = model.topics_over_time(translated_text, timestamps)
+    topic_model.visualize_topics_over_time(topics_over_time, topics=[9, 10, 72, 83, 87, 91])
+
+    #approximate topic distribution
+    topic_distr, _ = topic_model.approximate_distribution(translated_text, min_similarity=0)
+    # To visualize the probabilities of topic assignment
+    topic_model.visualize_distribution(probs[0])
+
+    # To visualize the topic distributions in a document
+    topic_model.visualize_distribution(topic_distr[0])
+
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")

@@ -62,12 +62,7 @@ def main():
                 
                 status.update(label="Process complete!", state="complete", expanded=False)
 
-            fig3 = topic_model.visualize_barchart()
-            st.write(fig3)    
-            fig1 = topic_model.visualize_hierarchy()
-            st.write(fig1) # Hierarchy Chart
-            fig2 = topic_model.visualize_topics()
-            st.write(fig2)
+            generate_visualizations_func(topic_model, timestamps, translated_text)
 
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
             # custom_funcs.show_doc_info(topic_model, translated_text)
