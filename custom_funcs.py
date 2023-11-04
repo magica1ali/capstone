@@ -21,6 +21,7 @@ from bertopic.vectorizers import ClassTfidfTransformer
 import pkg_resources
 from symspellpy import SymSpell
 import matplotlib.pyplot as plt
+from spellchecker import SpellChecker
 
 def setup_func():
     with st.spinner("Downloading resources..."):
