@@ -178,16 +178,16 @@ def parse_clean_func(text_dict):
     # Join the 'corpus' DataFrame onto the 'original_texts_df' DataFrame using the index
     corpus = corpus.join(original_texts_df)
 
-    #def remove_words_and_patterns(document, words_to_remove, patterns_to_remove):
+    def remove_words_and_patterns(document, words_to_remove, patterns_to_remove):
         # Split the document into words
-        #words = document.split()
+        words = document.split()
 
         # Clean the words by removing specified words and patterns
-        #cleaned_words = [word for word in words if word.lower() not in words_to_remove and not any(re.match(pattern, word) for pattern in patterns_to_remove)]
+        cleaned_words = [word for word in words if word.lower() not in words_to_remove and not any(re.match(pattern, word) for pattern in patterns_to_remove)]
 
         # Join the cleaned words to form the cleaned document
-        #cleaned_document = " ".join(cleaned_words)
-       # return cleaned_document
+        cleaned_document = " ".join(cleaned_words)
+        return cleaned_document
 
     # List of words to remove
     words_to_remove = ['veteran','veterans' ,'woman',"women", 'va', 'committee', 'program', 'center', 'study', 'report', 'service', 'within',
@@ -195,14 +195,14 @@ def parse_clean_func(text_dict):
                     ,'acwv']
 
     # List of patterns to remove (e.g., '2.', '11.', '12.', etc.) with dates excluded as well
-    #patterns_to_remove = [r'\d+\.', r'\d+\)',r'\b(?=199\d|20\d{2})\d{4}|january\s\d{1,2}\s|february\s\d{1,2}\s|march\s\d{1,2}\s|april\s\d{1,2}\s|may\s\d{1,2}\s|june\s\d{1,2}\s|july\s\d{1,2}\s|august\s\d{1,2}\s|september\s\d{1,2}\s|october\s\d{1,2}\s|november\s\d{1,2}\s|december\s\d{1,2}\s']
+    patterns_to_remove = [r'\d+\.', r'\d+\)',r'\b(?=199\d|20\d{2})\d{4}|january\s\d{1,2}\s|february\s\d{1,2}\s|march\s\d{1,2}\s|april\s\d{1,2}\s|may\s\d{1,2}\s|june\s\d{1,2}\s|july\s\d{1,2}\s|august\s\d{1,2}\s|september\s\d{1,2}\s|october\s\d{1,2}\s|november\s\d{1,2}\s|december\s\d{1,2}\s']
 
     #for i, row in corpus.iterrows():
         #recommendations = row['recommendations'].lower()
-        #original_text = row['original_text'].lower()
+        original_text = row['original_text'].lower()
         # Remove the specified words and patterns from the recommendations and convert it to lowercase
-        #cleaned_document = remove_words_and_patterns(recommendations, words_to_remove, patterns_to_remove)
-        #cleaned_document = remove_words_and_patterns(original_text, words_to_remove, patterns_to_remove)
+        cleaned_document = remove_words_and_patterns(recommendations, words_to_remove, patterns_to_remove)
+        cleaned_document = remove_words_and_patterns(original_text, words_to_remove, patterns_to_remove)
 
     file_path = "./data/words_dict.csv"
 
@@ -226,55 +226,35 @@ def parse_clean_func(text_dict):
 
         # Convert the text to lowercase
         text = text.lower()
-
+    
         # Remove punctuation
-        #my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
-        #text = text.translate(str.maketrans("", "", my_punctuation))
-
+        my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
+        text = text.translate(str.maketrans("", "", my_punctuation))
+    
         # Replace hyphens with spaces
-        #text = text.replace("-", " ")
-
+        text = text.replace("-", " ")
+    
         # Tokenize the text into words
         words = word_tokenize(text)
-
+    
         # Remove stopwords
         stop_words = set(stopwords.words("english"))
         words = [word for word in words if word not in stop_words]
-
+    
         # Lemmatization
-        #lemmatizer = WordNetLemmatizer()
-        #words = [lemmatizer.lemmatize(word) for word in words]
-
+        lemmatizer = WordNetLemmatizer()
+        words = [lemmatizer.lemmatize(word) for word in words]
+    
         # Rejoin the processed words into a single text
         processed_text = " ".join(words)
-
+    
         # Lowercase the words
         processed_text = processed_text.lower()
-
+    
         # Replace acronyms with
-
+    
         return processed_text
-
-    [preprocessed_text.append(preprocess_text(i)) for i in corpus['recommendations']]
-
-    spell_checked_text = []
-
-    sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
-    dictionary_path = pkg_resources.resource_filename("symspellpy", "frequency_dictionary_en_82_765.txt")
-
-    if not sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1):
-        print("Dictionary file not found")
-
-    def spell_check_and_correct(input_text):
-        suggestions = sym_spell.lookup_compound(input_text, max_edit_distance=2)
-        corrected_text = suggestions[0].term if suggestions else input_text
-        return corrected_text
-
-   
-    [spell_checked_text.append(spell_check_and_correct(i)) for i in preprocessed_text]
-
-    translated_text = []
-
+    
     #function to replace acronyms with plain text
     def replace_words(text, acronym_dict):
         words = text.split()
@@ -282,7 +262,35 @@ def parse_clean_func(text_dict):
         replaced_text = ' '.join(replaced_words)
         replaced_text = replaced_text.lower()
         return replaced_text
-   
+    
+    def spell_check_and_correct(input_text):
+        spell = SpellChecker()
+    
+        # Split the text into words
+        words = input_text.split()
+    
+        # Find misspelled words
+        misspelled = spell.unknown(words)
+    
+        # Correct misspelled words and return corrected text
+        corrected_words = []
+        for word in words:
+            corrected_word = spell.correction(word)
+            if word in misspelled and corrected_word is not None and corrected_word != word:
+                corrected_words.append(corrected_word)
+            else:
+                corrected_words.append(word)
+    
+        corrected_text = ' '.join(corrected_words)
+        return corrected_text
+    
+    
+    preprocessed_text = []
+    spell_checked_text = []
+    translated_text = []
+    
+    [preprocessed_text.append(preprocess_text(i)) for i in corpus['recommendations']]
+    [spell_checked_text.append(spell_check_and_correct(i)) for i in preprocessed_text]
     [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
     return corpus,translated_text 
 
