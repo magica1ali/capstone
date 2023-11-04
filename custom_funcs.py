@@ -197,8 +197,8 @@ def parse_clean_func(text_dict):
     # List of patterns to remove (e.g., '2.', '11.', '12.', etc.) with dates excluded as well
     patterns_to_remove = [r'\d+\.', r'\d+\)',r'\b(?=199\d|20\d{2})\d{4}|january\s\d{1,2}\s|february\s\d{1,2}\s|march\s\d{1,2}\s|april\s\d{1,2}\s|may\s\d{1,2}\s|june\s\d{1,2}\s|july\s\d{1,2}\s|august\s\d{1,2}\s|september\s\d{1,2}\s|october\s\d{1,2}\s|november\s\d{1,2}\s|december\s\d{1,2}\s']
 
-    #for i, row in corpus.iterrows():
-        #recommendations = row['recommendations'].lower()
+    for i, row in corpus.iterrows():
+        recommendations = row['recommendations'].lower()
         original_text = row['original_text'].lower()
         # Remove the specified words and patterns from the recommendations and convert it to lowercase
         cleaned_document = remove_words_and_patterns(recommendations, words_to_remove, patterns_to_remove)
