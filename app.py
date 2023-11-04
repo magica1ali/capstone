@@ -5,6 +5,7 @@ import nltk
 import spacy
 from bertopic import BERTopic
 import matplotlib.pyplot as plt
+from sentence_transformers import SentenceTransformer
 
 def main():
 
@@ -45,8 +46,10 @@ def main():
                 time.sleep(1)
                 
                 st.write('Instantiating BERTopic Model...')
+                # Load a pre-trained Sentence Transformer model
+                model = SentenceTransformer("all-mpnet-base-v2")
                 # Function to instantiate BERTopic Model
-                topic_model = BERTopic.load("magica1/saxa3-capstone")
+                topic_model = BERTopic.load("magica1/saxa3-capstone",model)
                 st.write('Model instantiated!')
                 
                 time.sleep(1)
