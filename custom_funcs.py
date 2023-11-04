@@ -136,13 +136,13 @@ def parse_clean_func(text_dict):
         elif re.search(r'1998', document_name, re.IGNORECASE):
             start_index = document_text.lower().find('part ii')  # Case-insensitive search
             end_index = document_text.lower().find('part iii', start_index)  # Case-insensitive search
-        if start_index != -1 and end_index != -1:
-            recommendations_section = document_text[start_index:end_index].strip()
-            #remove members and outreach sections
-            recommendations_section = remove_members(recommendations_section)
-            recommendations_section = recommendations_section.lower()
-            extracted_sections[document_name] = recommendations_section
-            original_texts[document_name] = document_text
+            if start_index != -1 and end_index != -1:
+                recommendations_section = document_text[start_index:end_index].strip()
+                #remove members and outreach sections
+                recommendations_section = remove_members(recommendations_section)
+                recommendations_section = recommendations_section.lower()
+                extracted_sections[document_name] = recommendations_section
+                original_texts[document_name] = document_text
         # Exception handling for reports from 2002 (wild year for this report)
         elif '2002' in document_name:
             # Process the 2002 report differently (e.g., extract sections between "Recommendations and Rationale" and "VA Response to Recommendations")
