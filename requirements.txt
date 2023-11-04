@@ -5,6 +5,7 @@ scikit-learn==1.2.2
 spacy==3.6.1
 Pillow==9.4.0
 PyMuPDF==1.23.5
+pyspellchecker==0.7.2
 umap-learn==0.5.4
 hdbscan==0.8.33
 sentence-transformers==2.2.2
