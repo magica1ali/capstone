@@ -358,19 +358,9 @@ def datetime_layer(text):
     
     return timestamps
 
-    
-
-
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")
         st.write(topic_model)
     else:
         raise ValueError('Topic model not found')
-    
-
-
-
- 
- 
-    
