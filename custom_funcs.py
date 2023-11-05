@@ -313,7 +313,7 @@ def parse_clean_func(text_dict):
     # Access the sentences with their corresponding report years
     for report_year, sentences in sentences_with_indices.items():
         for sentence in sentences:
-            translated_text.append(sentence)
+            translated_data.append(sentence)
             print(sentence)
 
    
