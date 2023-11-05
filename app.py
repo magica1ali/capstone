@@ -69,7 +69,48 @@ def main():
                 st.session_state.fig2 = topic_model.visualize_topics()
                 st.session_state.fig3 = topic_model.visualize_heatmap()
                 st.session_state.fig4 = topic_model.visualize_barchart()
+            
+            # Get topic representations from the pre-trained model
+            topic_info = topic_model.get_topic_info()
+            topic_names = topic_info['Name']
+
+            # Convert timestamps to datetime objects
+            timestamps = pd.to_datetime(timestamps)
+
+            # Create a DataFrame with topics and timestamps
+            data = {'Timestamps': timestamps, 'Topics': topics}
+            data = pd.DataFrame(data)
+
+            # Count the frequency of each topic for each timestamp
+            topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
+
+            # Streamlit app
+            st.title("Top 10 Topics Over Time (Interactive Line Chart)")
+
+            # Sidebar for filtering
+            unique_topics = sorted(data['Topics'].unique())
+            selected_topics = st.multiselect("Select Topics", unique_topics, unique_topics[:10])
+
+            # Filter and plot the selected topics as an interactive line chart
+            filtered_data = topic_frequencies[selected_topics]
+
+            # Reset index to make 'Timestamps' a regular column
+            filtered_data = filtered_data.reset_index()
+
+            # Melt the DataFrame to long format for Plotly Express
+            filtered_data_long = pd.melt(filtered_data, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
+
+            # Create an interactive line chart using Plotly Express
+            fig = px.line(filtered_data_long, x='Timestamps', y='Frequency', color='Topic',
+                        labels={'Timestamps': 'Year', 'Frequency': 'Frequency'},
+                        title="Top 10 Topics Over Time")
+            fig.update_xaxes(categoryorder='total ascending')
+
+            # Display the chart in Streamlit
+            st.plotly_chart(fig)
+            
             custom_funcs.prove_success_func(topic_model)
+
 
         except Exception as e:
             # Catch any exceptions and display them using st.exception()
