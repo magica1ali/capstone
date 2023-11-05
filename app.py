@@ -42,7 +42,7 @@ def main():
                 # Load a CSV file as a DataFrame
                 df = pd.read_csv('data/datetime_index.csv')
                 # Convert the "timestamp" to a DatetimeIndex
-                model_timestamp = pd.to_datetime(df["timestamp"])
+                model_timestamp = pd.to_datetime(df[0])
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 # Concatenate the two DatetimeIndex objects
                 combined_timestamps = model_timestamp.union(timestamps)
