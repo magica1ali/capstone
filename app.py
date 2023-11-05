@@ -34,12 +34,12 @@ def main():
                 st.write('Parsing, spell-checking, and preprocessing recommendations text from PDFs...')
                 # Function to parse out the recommendations section, clean, and preprocess corpus
                 corpus,translated_data = custom_funcs.parse_clean_func(text_dict)
-                st.write(len(translated_data))
+                st.write(len(translated_text))
 
                 timestamps = custom_funcs.datetime_layer(translated_data)
                 st.write('Recommendations text preprocessed!')
                 st.write(timestamps)
-                st.write(translated_data[0])
+                st.write(translated_text[0])
                 
                 time.sleep(1)
                 
@@ -53,7 +53,7 @@ def main():
                 time.sleep(1)
                 
                 st.write('Fitting data to model and extracting topics...')
-                topics, probs = topic_model.transform(translated_data)
+                topics, probs = topic_model.transform(translated_text)
                 st.write('Model fitted!')
                 
                 time.sleep(1)
