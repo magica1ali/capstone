@@ -222,57 +222,54 @@ def parse_clean_func(text_dict):
     words_dict = {key.lower(): value for key, value in words_dict.items()}
 
     preprocessed_text = [] 
+import nltk
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from spellchecker import SpellChecker
+
+def process_and_tokenize_corpus(corpus, words_dict):
+    translated_texts = {}
+
     def preprocess_text(text):
         # Convert the text to lowercase
         text = text.lower()
-    
+
         # Remove punctuation
         my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
         text = text.translate(str.maketrans("", "", my_punctuation))
-    
+
         # Replace hyphens with spaces
         text = text.replace("-", " ")
-    
+
         # Tokenize the text into words
         words = word_tokenize(text)
-    
+
         # Remove stopwords
         stop_words = set(stopwords.words("english"))
         words = [word for word in words if word not in stop_words]
-    
+
         # Lemmatization
         lemmatizer = WordNetLemmatizer()
         words = [lemmatizer.lemmatize(word) for word in words]
 
         # Rejoin the processed words into a single text
         processed_text = " ".join(words)
-    
+
         # Lowercase the words
         processed_text = processed_text.lower()
-    
-        # Replace acronyms with (if needed)
 
         return processed_text
 
-    # Function to replace acronyms with plain text
-    def replace_words(text, acronym_dict):
-        words = text.split()
-        replaced_words = [acronym_dict.get(word, word) for word in words]
-        replaced_text = ' '.join(replaced_words)
-        replaced_text = replaced_text.lower()
-        return replaced_text
-    
-    spell_checked_text = []
-    
     def spell_check_and_correct(input_text):
         spell = SpellChecker()
-    
+
         # Split the text into words
         words = input_text.split()
-    
-         # Find misspelled words
+
+        # Find misspelled words
         misspelled = spell.unknown(words)
-    
+
         # Correct misspelled words and return corrected text
         corrected_words = []
         for word in words:
@@ -281,43 +278,40 @@ def parse_clean_func(text_dict):
                 corrected_words.append(corrected_word)
             else:
                 corrected_words.append(word)
-    
-            corrected_text = ' '.join(corrected_words)
-            return corrected_text
-    
-    translated_texts = {}
-    
+
+        corrected_text = ' '.join(corrected_words)
+        return corrected_text
+
     for index, row in corpus.iterrows():
         i = row['recommendations']
-    
+
         preprocessed = preprocess_text(i)
         spell_checked = spell_check_and_correct(preprocessed)
         translated = replace_words(spell_checked, words_dict)
-    
+
         # Store the translated texts with their row indices (report years) in the dictionary
         translated_texts[index] = translated
-    
+
     sentences_with_indices = {}
-    
+
     for report_year, translated_text in translated_texts.items():
         # Split the translated text into sentences
-        sentences = nltk.sent_tokenize(translated_text)
-    
+        sentences = sent_tokenize(translated_text)
+
         # Append the original index (report year) to each sentence
         sentences_with_indices[report_year] = [
             f"{sentence} {report_year}" for sentence in sentences
         ]
-    
+
     translated_text = []
-    
+
     # Access the sentences with their corresponding report years
     for report_year, sentences in sentences_with_indices.items():
         for sentence in sentences:
             translated_text.append(sentence)
-            
-
-   
-    return translated_text, translated_texts
+            print(sentence)
+    
+    return translated_text
 
  
 #Extracts timestamps for topics over time visulization
