@@ -222,13 +222,7 @@ def parse_clean_func(text_dict):
     words_dict = {key.lower(): value for key, value in words_dict.items()}
 
     preprocessed_text = [] 
-import nltk
-from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from spellchecker import SpellChecker
 
-def process_and_tokenize_corpus(corpus, words_dict):
     translated_texts = {}
 
     def preprocess_text(text):
