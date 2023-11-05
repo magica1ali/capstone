@@ -39,7 +39,7 @@ def main():
                 text_year = custom_funcs.spacyLayer(translated_text,corpus)
                 filtered_sentences = custom_funcs.append_years(text_year)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
-                st.write('Reccomendations text preprocessed!')
+                st.write('Recommendations text preprocessed!')
                 st.write(len(filtered_sentences))
                 st.write(filtered_sentences[0])
                 
@@ -54,11 +54,9 @@ def main():
                 
                 time.sleep(1)
                 
-                #st.write('Fitting data to model and extracting topics...')
-                #topics, probs = topic_model.transform(filtered_sentences)
-                example = "Stalemate is a drawn position. It doesn't matter who has captured more pieces or is in a winning position"
-                topic, prob = topic_model.transform(example)
-                #st.write('Model fitted!')
+                st.write('Fitting data to model and extracting topics...')
+                topics, probs = topic_model.transform(filtered_sentences)
+                st.write('Model fitted!')
                 
                 time.sleep(1)
                 
@@ -68,7 +66,7 @@ def main():
                 st.write('Creating Visualizations...')
                 status.update(label="Process complete!", state="complete", expanded=False)
             
-                st.session_state.fig0 = topic_model.get_topic_info(topic)
+                st.session_state.fig0 = topic_model.get_topic_info()
                 st.session_state.fig1 = topic_model.visualize_hierarchy()
                 st.session_state.fig2 = topic_model.visualize_topics()
                 st.session_state.fig3 = topic_model.visualize_heatmap()
