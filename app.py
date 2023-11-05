@@ -66,16 +66,14 @@ def main():
                 st.write('Creating Visualizations...')
                 status.update(label="Process complete!", state="complete", expanded=False)
             
-                fig0 = topic_model.get_topic_info()
-                st.write(fig0) # Topic Information 
+                st.session_state.fig0 = topic_model.get_topic_info()
                 fig1 = topic_model.visualize_hierarchy()
-                st.write(fig1) # Hierarchy Chart
+                #st.write(fig1) # Hierarchy Chart
                 fig2 = topic_model.visualize_topics()
-                st.write(fig2) # Intertopic Distance 
-                fig3 = topic_model.visualize_heatmap()
-                st.write(fig3) # Topic similarity 
+                #st.write(fig2) # Intertopic Distance 
+                st.session_state.fig3 = topic_model.visualize_heatmap()
                 fig4 = topic_model.visualize_barchart()
-                st.write(fig4)
+                #st.write(fig4)
             custom_funcs.prove_success_func(topic_model)
 
         except Exception as e:
