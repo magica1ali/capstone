@@ -60,16 +60,22 @@ def main():
                 
                 time.sleep(1)
                 
+                # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
+                # custom_funcs.show_doc_info(topic_model, translated_text)
+
                 st.write('Creating Visualizations...')
+                status.update(label="Process complete!", state="complete", expanded=False)
+            
+                fig0 = topic_model.get_topic_info()
+                st.write(fig0) # Topic Information 
                 fig1 = topic_model.visualize_hierarchy()
                 st.write(fig1) # Hierarchy Chart
                 fig2 = topic_model.visualize_topics()
-                st.write(fig2)
-                # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
-                # custom_funcs.show_doc_info(topic_model, translated_text)
-                
-                status.update(label="Process complete!", state="complete", expanded=False)
-            
+                st.write(fig2) # Intertopic Distance 
+                fig3 = topic_model.visualize_heatmap()
+                st.write(fig3) # Topic similarity 
+                fig4 = topic_model.visualize_barchart()
+                st.write(fig4)
             custom_funcs.prove_success_func(topic_model)
 
         except Exception as e:
