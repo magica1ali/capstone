@@ -43,9 +43,12 @@ def main():
                 df = pd.read_csv('data/datetime_index.csv')
                 # Convert the "timestamp" to a DatetimeIndex
                 model_timestamp = pd.to_datetime(df['timestamps'])
+                # Check if they are DatetimeIndex
+                is_datetimeindex1 = isinstance(model_timestamp, pd.DatetimeIndex)
+                st.write(is_datetimeindex1)
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
                 # Concatenate the two DatetimeIndex objects
-                combined_timestamps = model_timestamp.union(timestamps)
+                #combined_timestamps = model_timestamp.union(timestamps)
                 
                 num_reccomendations_processed = st.write(len(filtered_sentences))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
@@ -72,12 +75,12 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=filtered_sentences,
+            #topics_over_time = topic_model.topics_over_time(docs=filtered_sentences,
                                                 timestamps=combined_timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
                                                 nr_bins=15)
-            st.write(topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=10))
+            #st.write(topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=10))
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
             # custom_funcs.show_doc_info(topic_model, translated_text)
             custom_funcs.prove_success_func(topic_model)
