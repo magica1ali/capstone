@@ -55,7 +55,7 @@ def main():
                 time.sleep(1)
                 
                 #st.write('Fitting data to model and extracting topics...')
-                topics, probs = topic_model.transform(filtered_sentences)
+                new_topics, new_probs = topic_model.transform(filtered_sentences)
                 #st.write('Model fitted!')
                 
                 time.sleep(1)
@@ -66,11 +66,11 @@ def main():
                 st.write('Creating Visualizations...')
                 status.update(label="Process complete!", state="complete", expanded=False)
             
-                st.session_state.fig0 = topic_model.get_topic_info(topics)
-                st.session_state.fig1 = topic_model.visualize_hierarchy(topics)
-                st.session_state.fig2 = topic_model.visualize_topics(topics)
-                st.session_state.fig3 = topic_model.visualize_heatmap(topics)
-                st.session_state.fig4 = topic_model.visualize_barchart(topics)
+                st.session_state.fig0 = topic_model.get_topic_info(new_topics)
+                st.session_state.fig1 = topic_model.visualize_hierarchy(new_topics)
+                st.session_state.fig2 = topic_model.visualize_topics(new_topics)
+                st.session_state.fig3 = topic_model.visualize_heatmap(new_topics)
+                st.session_state.fig4 = topic_model.visualize_barchart(new_topics)
             custom_funcs.prove_success_func(topic_model)
 
         except Exception as e:
