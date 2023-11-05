@@ -67,13 +67,10 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
             
                 st.session_state.fig0 = topic_model.get_topic_info()
-                fig1 = topic_model.visualize_hierarchy()
-                #st.write(fig1) # Hierarchy Chart
-                fig2 = topic_model.visualize_topics()
-                #st.write(fig2) # Intertopic Distance 
+                st.session_state.fig1 = topic_model.visualize_hierarchy()
+                st.session_state.fig2 = topic_model.visualize_topics()
                 st.session_state.fig3 = topic_model.visualize_heatmap()
-                fig4 = topic_model.visualize_barchart()
-                #st.write(fig4)
+                st.session_state.fig4 = topic_model.visualize_barchart()
             custom_funcs.prove_success_func(topic_model)
 
         except Exception as e:
