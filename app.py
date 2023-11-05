@@ -49,10 +49,13 @@ def main():
                 combined_timestamps = model_timestamp.union(timestamps)
                 
                 # Load the text file into a DataFrame
+                sentences_list = []
                 sentence_path = "data/sentences.txt"
-                df = pd.read_csv(sentence_path, header=None, names=["Sentences"])
-                # Convert the DataFrame column to a list of text sentences
-                sentences_list = df["Sentences"].tolist()
+                # Open the file and read the sentences
+                with open(sentence_path, 'r', encoding='utf-8') as file:
+                    for line in file:
+                        # Remove leading/trailing whitespaces and append to the list
+                        sentences_list.append(line.strip())
                 num_reccomendations_processed = st.write(len(sentences_list))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
