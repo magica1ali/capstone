@@ -221,119 +221,103 @@ def parse_clean_func(text_dict):
     # Convert word dict dataframe to dictionary
     words_dict = {key.lower(): value for key, value in words_dict.items()}
 
-    preprocessed_text = []  # Continue with your code as needed
-
     def preprocess_text(text):
+    # Convert the text to lowercase
+    text = text.lower()
 
-        # Convert the text to lowercase
-        text = text.lower()
-    
-        # Remove punctuation
-        my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
-        text = text.translate(str.maketrans("", "", my_punctuation))
-    
-        # Replace hyphens with spaces
-        text = text.replace("-", " ")
-    
-        # Tokenize the text into words
-        words = word_tokenize(text)
-    
-        # Remove stopwords
-        stop_words = set(stopwords.words("english"))
-        words = [word for word in words if word not in stop_words]
-    
-        # Lemmatization
-        lemmatizer = WordNetLemmatizer()
-        words = [lemmatizer.lemmatize(word) for word in words]
-    
-        # Rejoin the processed words into a single text
-        processed_text = " ".join(words)
-    
-        # Lowercase the words
-        processed_text = processed_text.lower()
-    
-        # Replace acronyms with
-    
-        return processed_text
-    
-    #function to replace acronyms with plain text
-    def replace_words(text, acronym_dict):
-        words = text.split()
-        replaced_words = [acronym_dict.get(word, word) for word in words]
-        replaced_text = ' '.join(replaced_words)
-        replaced_text = replaced_text.lower()
-        return replaced_text
-    
+    # Remove punctuation
+    my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
+    text = text.translate(str.maketrans("", "", my_punctuation))
+
+    # Replace hyphens with spaces
+    text = text.replace("-", " ")
+
+    # Tokenize the text into words
+    words = word_tokenize(text)
+
+    # Remove stopwords
+    stop_words = set(stopwords.words("english"))
+    words = [word for word in words if word not in stop_words]
+
+    # Lemmatization
+    lemmatizer = WordNetLemmatizer()
+    words = [lemmatizer.lemmatize(word) for word in words]
+
+    # Rejoin the processed words into a single text
+    processed_text = " ".join(words)
+
+    # Lowercase the words
+    processed_text = processed_text.lower()
+
+    # Replace acronyms with (if needed)
+
+    return processed_text
+
+# Function to replace acronyms with plain text
+def replace_words(text, acronym_dict):
+    words = text.split()
+    replaced_words = [acronym_dict.get(word, word) for word in words]
+    replaced_text = ' '.join(replaced_words)
+    replaced_text = replaced_text.lower()
+    return replaced_text
+
+spell_checked_text = []
+
     def spell_check_and_correct(input_text):
-        spell = SpellChecker()
+            spell = SpellChecker()
     
-        # Split the text into words
-        words = input_text.split()
+            # Split the text into words
+            words = input_text.split()
     
-        # Find misspelled words
-        misspelled = spell.unknown(words)
+            # Find misspelled words
+            misspelled = spell.unknown(words)
     
-        # Correct misspelled words and return corrected text
-        corrected_words = []
-        for word in words:
-            corrected_word = spell.correction(word)
-            if word in misspelled and corrected_word is not None and corrected_word != word:
-                corrected_words.append(corrected_word)
-            else:
-                corrected_words.append(word)
+            # Correct misspelled words and return corrected text
+            corrected_words = []
+            for word in words:
+                corrected_word = spell.correction(word)
+                if word in misspelled and corrected_word is not None and corrected_word != word:
+                    corrected_words.append(corrected_word)
+                else:
+                    corrected_words.append(word)
     
-        corrected_text = ' '.join(corrected_words)
-        return corrected_text
+            corrected_text = ' '.join(corrected_words)
+            return corrected_text
     
+    translated_texts = {}
     
-    preprocessed_text = []
-    spell_checked_text = []
+    for index, row in corpus.iterrows():
+        i = row['recommendations']
+    
+        preprocessed = preprocess_text(i)
+        spell_checked = spell_check_and_correct(preprocessed)
+        translated = replace_words(spell_checked, words_dict)
+    
+        # Store the translated texts with their row indices (report years) in the dictionary
+        translated_texts[index] = translated
+    
+    sentences_with_indices = {}
+    
+    for report_year, translated_text in translated_texts.items():
+        # Split the translated text into sentences
+        sentences = nltk.sent_tokenize(translated_text)
+    
+        # Append the original index (report year) to each sentence
+        sentences_with_indices[report_year] = [
+            f"{sentence} {report_year}" for sentence in sentences
+        ]
+    
     translated_text = []
     
-    [preprocessed_text.append(preprocess_text(i)) for i in corpus['recommendations']]
-    [spell_checked_text.append(spell_check_and_correct(i)) for i in preprocessed_text]
-    [translated_text.append(replace_words(item, words_dict)) for item in spell_checked_text]
+    # Access the sentences with their corresponding report years
+    for report_year, sentences in sentences_with_indices.items():
+        for sentence in sentences:
+            translated_text.append(sentence)
+            print(sentence)
+
+   
     return corpus,translated_text 
 
-#split text into sentences and add the document year to each sentence
-def spacyLayer(text,corpus):
-    index_to_year = {}
-    
-    for i in range(len(corpus)):
-        index_to_year[i] = corpus.index[i]
-    
-    # Create a new list to store sentences with updated indices
-    sentences_with_years = []
-    
-    # Iterate through the sentences and rename the indices
-    for index, sentence in enumerate(text):
-        year = index_to_year.get(index, None)
-    if year is not None:
-        sentences_with_years.append(f"{year}: {sentence}")
-    return sentences_with_years
-    
-def append_years(sentences):
-    # Initialize an empty list to store sentences with year appended
-    sentences_with_years_appended = []
-    
-    # Iterate through each document in sentences_with_years
-    for document in sentences:
-        # Split the document into sentence text and year
-        year, sentence_text = document.split(": ", 1)
- 
-    # Parse the sentence using spaCy
-    nlp = spacy.load("en_core_web_lg")
-    doc = nlp(sentence_text)
-    
-    # Iterate through each sentence in the document
-    for sentence in doc.sents:
-        # Append the sentence with year appended
-        sentence_with_year = f"{sentence.text} ({year})"
-        sentences_with_years_appended.append(sentence_with_year)
-        
-    filtered_sentences = [sentence for sentence in sentences_with_years_appended if len(sentence) >= 15]
-    
-    return filtered_sentences
  
 #Extracts timestamps for topics over time visulization
 def datetime_layer(text):
