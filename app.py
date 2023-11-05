@@ -33,13 +33,13 @@ def main():
 
                 st.write('Parsing, spell-checking, and preprocessing recommendations text from PDFs...')
                 # Function to parse out the recommendations section, clean, and preprocess corpus
-                corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
+                corpus,translated_text,sentences = custom_funcs.parse_clean_func(text_dict)
                 st.write(len(translated_text))
 
                 timestamps = custom_funcs.datetime_layer(translated_text)
                 st.write('Recommendations text preprocessed!')
                 st.write(timestamps)
-                st.write(translated_text[0])
+                st.write(sentences[0])
                 
                 time.sleep(1)
                 
