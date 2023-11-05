@@ -37,7 +37,15 @@ def main():
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
                 text_year = custom_funcs.spacyLayer(translated_text,corpus)
                 filtered_sentences = custom_funcs.append_years(text_year)
+                
+                # Load a CSV file as a DataFrame
+                df = pd.read_csv('data/datetime_index.csv')
+                # Convert the "timestamp" to a DatetimeIndex
+                model_timestamp = pd.to_datetime(df["timestamp"])
                 timestamps = custom_funcs.datetime_layer(filtered_sentences)
+                # Concatenate the two DatetimeIndex objects
+                combined_timestamps = model_timestamp.union(timestamps)
+                
                 num_reccomendations_processed = st.write(len(filtered_sentences))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
@@ -64,7 +72,7 @@ def main():
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
             topics_over_time = topic_model.topics_over_time(docs=filtered_sentences,
-                                                timestamps=timestamps,
+                                                timestamps=combined_timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
                                                 nr_bins=15)
