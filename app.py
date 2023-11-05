@@ -36,9 +36,7 @@ def main():
                 corpus,translated_text = custom_funcs.parse_clean_func(text_dict)
                 st.write(len(translated_text))
 
-                text_year = custom_funcs.spacyLayer(translated_text,corpus)
-                filtered_sentences = custom_funcs.append_years(text_year)
-                timestamps = custom_funcs.datetime_layer(filtered_sentences)
+                timestamps = custom_funcs.datetime_layer(translated_text)
                 st.write('Recommendations text preprocessed!')
                 st.write(len(filtered_sentences))
                 st.write(filtered_sentences[0])
@@ -55,7 +53,7 @@ def main():
                 time.sleep(1)
                 
                 st.write('Fitting data to model and extracting topics...')
-                topics, probs = topic_model.transform(filtered_sentences)
+                topics, probs = topic_model.transform(translated_text)
                 st.write('Model fitted!')
                 
                 time.sleep(1)
