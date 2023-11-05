@@ -48,19 +48,13 @@ def main():
                 # Concatenate the two DatetimeIndex objects
                 combined_timestamps = model_timestamp.union(timestamps)
                 
-                # Create a file uploader widget
-                uploaded_file = st.file_uploader("Upload a file containing sentences", type=["txt"])
+                # Load the text file into a DataFrame
+                file_path = "data/sentences.txt"
+                df_sen = pd.read_csv(file_path, header=None, names=["Sentences"], sep="\n")
 
-                # Initialize an empty list to store the sentences
-                sentences = []
-
-                if uploaded_file is not None:
-                # Read and process the uploaded file
-                    contents = uploaded_file.read()
-                # Split the contents into a list of sentences (assuming each sentence is on a new line)
-                    sentences = contents.split("\n")
-                sentences.extend(filtered_sentences)
-                num_reccomendations_processed = st.write(len(sentences))
+                # Convert the DataFrame column to a list of text sentences
+                sentences_list = df["Sentences"].tolist()
+                num_reccomendations_processed = st.write(len(sentences_list))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
                 
