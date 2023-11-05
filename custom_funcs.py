@@ -308,16 +308,16 @@ def parse_clean_func(text_dict):
             f"{sentence} {report_year}" for sentence in sentences
         ]
     
-    translated_data = []
+    translated_text = []
     
     # Access the sentences with their corresponding report years
     for report_year, sentences in sentences_with_indices.items():
         for sentence in sentences:
-            translated_data.append(sentence)
+            translated_text.append(sentence)
             
 
    
-    return corpus,translated_data 
+    return corpus,translated_text
 
  
 #Extracts timestamps for topics over time visulization
