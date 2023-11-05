@@ -84,8 +84,8 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=combined_list,
-                                                timestamps=combined_timestamps,
+            topics_over_time = topic_model.topics_over_time(docs=sentences_list,
+                                                timestamps=model_timestamp,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
                                                 nr_bins=15)
