@@ -62,7 +62,7 @@ def main():
                 
                 status.update(label="Process complete!", state="complete", expanded=False)
 
-            generate_visualizations_func(topic_model, timestamps, translated_text)
+            generate_visualizations_func(topic_model, timestamps, filtered_sentences)
 
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
             # custom_funcs.show_doc_info(topic_model, translated_text)
