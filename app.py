@@ -57,9 +57,8 @@ def main():
                 if uploaded_file is not None:
                 # Read and process the uploaded file
                     contents = uploaded_file.read()
-
                 # Split the contents into a list of sentences (assuming each sentence is on a new line)
-                sentences = contents.split("\n")
+                    sentences = contents.split("\n")
                 sentences.extend(filtered_sentences)
                 num_reccomendations_processed = st.write(len(sentences))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
