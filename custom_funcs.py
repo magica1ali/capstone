@@ -243,13 +243,13 @@ def parse_clean_func(text_dict):
         lemmatizer = WordNetLemmatizer()
         words = [lemmatizer.lemmatize(word) for word in words]
 
-    # Rejoin the processed words into a single text
-    processed_text = " ".join(words)
-
-    # Lowercase the words
-    processed_text = processed_text.lower()
-
-    # Replace acronyms with (if needed)
+        # Rejoin the processed words into a single text
+        processed_text = " ".join(words)
+    
+        # Lowercase the words
+        processed_text = processed_text.lower()
+    
+        # Replace acronyms with (if needed)
 
     return processed_text
 
