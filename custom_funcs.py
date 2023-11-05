@@ -221,6 +221,7 @@ def parse_clean_func(text_dict):
     # Convert word dict dataframe to dictionary
     words_dict = {key.lower(): value for key, value in words_dict.items()}
 
+    preprocessed_text = [] 
     def preprocess_text(text):
         # Convert the text to lowercase
         text = text.lower()
