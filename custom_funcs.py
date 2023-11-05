@@ -253,33 +253,33 @@ def parse_clean_func(text_dict):
 
     return processed_text
 
-# Function to replace acronyms with plain text
-def replace_words(text, acronym_dict):
-    words = text.split()
-    replaced_words = [acronym_dict.get(word, word) for word in words]
-    replaced_text = ' '.join(replaced_words)
-    replaced_text = replaced_text.lower()
-    return replaced_text
-
-spell_checked_text = []
-
+    # Function to replace acronyms with plain text
+    def replace_words(text, acronym_dict):
+        words = text.split()
+        replaced_words = [acronym_dict.get(word, word) for word in words]
+        replaced_text = ' '.join(replaced_words)
+        replaced_text = replaced_text.lower()
+        return replaced_text
+    
+    spell_checked_text = []
+    
     def spell_check_and_correct(input_text):
-            spell = SpellChecker()
+        spell = SpellChecker()
     
-            # Split the text into words
-            words = input_text.split()
+        # Split the text into words
+        words = input_text.split()
     
-            # Find misspelled words
-            misspelled = spell.unknown(words)
+         # Find misspelled words
+        misspelled = spell.unknown(words)
     
-            # Correct misspelled words and return corrected text
-            corrected_words = []
-            for word in words:
-                corrected_word = spell.correction(word)
-                if word in misspelled and corrected_word is not None and corrected_word != word:
-                    corrected_words.append(corrected_word)
-                else:
-                    corrected_words.append(word)
+        # Correct misspelled words and return corrected text
+        corrected_words = []
+        for word in words:
+            corrected_word = spell.correction(word)
+            if word in misspelled and corrected_word is not None and corrected_word != word:
+                corrected_words.append(corrected_word)
+            else:
+                corrected_words.append(word)
     
             corrected_text = ' '.join(corrected_words)
             return corrected_text
