@@ -84,9 +84,9 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=sentences_list,
-                                                timestamps=model_timestamp)
-            st.write(topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=10))
+            topics_over_time = topic_model.topics_over_time(docs=combined_list,
+                                                timestamps=combined_timestamps)
+            st.write(topic_model.visualize_topics_over_time(topics_over_time))
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
             # custom_funcs.show_doc_info(topic_model, translated_text)
             custom_funcs.prove_success_func(topic_model)
