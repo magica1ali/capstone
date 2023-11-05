@@ -252,7 +252,7 @@ def parse_clean_func(text_dict):
     
         # Replace acronyms with (if needed)
 
-    return processed_text
+        return processed_text
 
     # Function to replace acronyms with plain text
     def replace_words(text, acronym_dict):
