@@ -6,6 +6,7 @@ import spacy
 from bertopic import BERTopic
 import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
+import pandas as pd
 
 def main():
 
