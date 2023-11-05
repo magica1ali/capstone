@@ -62,7 +62,7 @@ def main():
                 combined_list = sentences_list + filtered_sentences
                 # Convert non-string elements to strings
                 sentences_list = [str(sentence) for sentence in sentences_list]
-                sentences_array = np.array(sentences_list).reshape(-1, 1)
+                sentences_array = np.array(sentences_list).reshape(1, -1)
                 num_reccomendations_processed = st.write(len(sentences_list))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
@@ -89,7 +89,7 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=sentences_list,
+            topics_over_time = topic_model.topics_over_time(docs=sentences_array,
                                                 timestamps=model_timestamp)
             st.write(topic_model.visualize_topics_over_time(topics_over_time))
             # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
