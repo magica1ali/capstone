@@ -318,7 +318,7 @@ def parse_clean_func(text_dict):
             translated_text.append(sentence)
             print(sentence)
 
-return translated_text
+    return translated_text
 
  
 #Extracts timestamps for topics over time visulization
