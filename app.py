@@ -60,6 +60,8 @@ def main():
                         sentences_list.append(line.strip())
                 # Combine the two lists
                 combined_list = sentences_list + filtered_sentences
+                # Convert non-string elements to strings
+                sentences_list = [str(sentence) for sentence in sentences_list]
                 sentences_array = np.array(sentences_list).reshape(-1, 1)
                 num_reccomendations_processed = st.write(len(sentences_list))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
