@@ -39,7 +39,7 @@ def main():
                 timestamps = custom_funcs.datetime_layer(translated_text)
                 st.write('Recommendations text preprocessed!')
                 st.write(timestamps)
-                st.write(sentences[2])
+                st.write(sentences)
                 
                 time.sleep(1)
                 
