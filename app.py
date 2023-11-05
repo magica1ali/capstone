@@ -66,11 +66,11 @@ def main():
                 st.write('Creating Visualizations...')
                 status.update(label="Process complete!", state="complete", expanded=False)
             
-                st.session_state.fig0 = topic_model.get_topic_info(filtered_sentences)
-                st.session_state.fig1 = topic_model.visualize_hierarchy(filtered_sentences)
-                st.session_state.fig2 = topic_model.visualize_topics(filtered_sentences)
-                st.session_state.fig3 = topic_model.visualize_heatmap(filtered_sentences)
-                st.session_state.fig4 = topic_model.visualize_barchart(filtered_sentences)
+                st.session_state.fig0 = topic_model.get_topic_info()
+                st.session_state.fig1 = topic_model.visualize_hierarchy()
+                st.session_state.fig2 = topic_model.visualize_topics()
+                st.session_state.fig3 = topic_model.visualize_heatmap()
+                st.session_state.fig4 = topic_model.visualize_barchart()
             custom_funcs.prove_success_func(topic_model)
 
         except Exception as e:
