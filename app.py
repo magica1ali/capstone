@@ -48,8 +48,22 @@ def main():
                 # Concatenate the two DatetimeIndex objects
                 combined_timestamps = model_timestamp.union(timestamps)
                 
-                num_reccomendations_processed = st.write(len(filtered_sentences))
+                # Create a file uploader widget
+                uploaded_file = st.file_uploader("Upload a file containing sentences", type=["txt"])
+
+                # Initialize an empty list to store the sentences
+                sentences = []
+
+                if uploaded_file is not None:
+                # Read and process the uploaded file
+                    contents = uploaded_file.read()
+
+                # Split the contents into a list of sentences (assuming each sentence is on a new line)
+                sentences = contents.split("\n")
+                sentences.extend(filtered_sentences)
+                num_reccomendations_processed = st.write(len(sentences))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
+                
                 
                 time.sleep(1)
                 
@@ -73,7 +87,7 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=filtered_sentences,
+            topics_over_time = topic_model.topics_over_time(docs=sentences,
                                                 timestamps=combined_timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
