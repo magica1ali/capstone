@@ -42,7 +42,8 @@ def main():
                 # Load a CSV file as a DataFrame
                 df = pd.read_csv('data/datetime_index.csv')
                 # Convert the "timestamp" to a DatetimeIndex
-                model_timestamp = pd.to_datetime(df['timestamps'])
+                df['timestamps'] = pd.to_datetime(df['timestamps'])  # Ensure it's in datetime format
+                model_timestamp = df.set_index('timestamps').index
                 # Check if they are DatetimeIndex
                 is_datetimeindex1 = isinstance(model_timestamp, pd.DatetimeIndex)
                 st.write(is_datetimeindex1)
