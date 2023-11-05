@@ -38,8 +38,8 @@ def main():
 
                 timestamps = custom_funcs.datetime_layer(translated_text)
                 st.write('Recommendations text preprocessed!')
-                st.write(len(filtered_sentences))
-                st.write(filtered_sentences[0])
+                st.write(len(translated_text))
+                st.write(translated_text[0])
                 
                 time.sleep(1)
                 
