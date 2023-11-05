@@ -50,8 +50,7 @@ def main():
                 
                 # Load the text file into a DataFrame
                 sentence_path = "data/sentences.txt"
-                df_sen = pd.read_csv(sentence_path, header=None,sep="\n")
-
+                df = pd.read_csv(file_path, header=None, names=["Sentences"])
                 # Convert the DataFrame column to a list of text sentences
                 sentences_list = df["Sentences"].tolist()
                 num_reccomendations_processed = st.write(len(sentences_list))
