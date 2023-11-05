@@ -222,26 +222,26 @@ def parse_clean_func(text_dict):
     words_dict = {key.lower(): value for key, value in words_dict.items()}
 
     def preprocess_text(text):
-    # Convert the text to lowercase
-    text = text.lower()
-
-    # Remove punctuation
-    my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
-    text = text.translate(str.maketrans("", "", my_punctuation))
-
-    # Replace hyphens with spaces
-    text = text.replace("-", " ")
-
-    # Tokenize the text into words
-    words = word_tokenize(text)
-
-    # Remove stopwords
-    stop_words = set(stopwords.words("english"))
-    words = [word for word in words if word not in stop_words]
-
-    # Lemmatization
-    lemmatizer = WordNetLemmatizer()
-    words = [lemmatizer.lemmatize(word) for word in words]
+        # Convert the text to lowercase
+        text = text.lower()
+    
+        # Remove punctuation
+        my_punctuation = '”!"#$%&()*+,\'''/:;<=>?@[\\]’^_`{|}~“•'
+        text = text.translate(str.maketrans("", "", my_punctuation))
+    
+        # Replace hyphens with spaces
+        text = text.replace("-", " ")
+    
+        # Tokenize the text into words
+        words = word_tokenize(text)
+    
+        # Remove stopwords
+        stop_words = set(stopwords.words("english"))
+        words = [word for word in words if word not in stop_words]
+    
+        # Lemmatization
+        lemmatizer = WordNetLemmatizer()
+        words = [lemmatizer.lemmatize(word) for word in words]
 
     # Rejoin the processed words into a single text
     processed_text = " ".join(words)
