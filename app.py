@@ -48,7 +48,7 @@ def main():
                 # Concatenate the two DatetimeIndex objects
                 combined_timestamps = model_timestamp.union(timestamps)
                 
-                # Load the text file into a DataFrame
+                # Load the text file(sentences used in model) into a DataFrame 
                 sentences_list = []
                 sentence_path = "data/sentences.txt"
                 # Open the file and read the sentences
@@ -56,7 +56,9 @@ def main():
                     for line in file:
                         # Remove leading/trailing whitespaces and append to the list
                         sentences_list.append(line.strip())
-                num_reccomendations_processed = st.write(len(sentences_list))
+                # Combine the two lists
+                combined_list = sentences_list + filtered_sentences
+                num_reccomendations_processed = st.write(len(combined_list))
                 st.write(f'{num_reccomendations_processed} Document(s) cleaned and preprocessed!')
                 
                 
@@ -82,7 +84,7 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
 
             #generate_visualizations_func(topic_model, timestamps, filtered_sentences)
-            topics_over_time = topic_model.topics_over_time(docs=sentences,
+            topics_over_time = topic_model.topics_over_time(docs=combined_list,
                                                 timestamps=combined_timestamps,
                                                 global_tuning=True,
                                                 evolution_tuning=True,
