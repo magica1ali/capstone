@@ -314,7 +314,7 @@ def parse_clean_func(text_dict):
     for report_year, sentences in sentences_with_indices.items():
         for sentence in sentences:
             translated_data.append(sentence)
-            print(sentence)
+            return sentence 
 
    
     return corpus,translated_data 
