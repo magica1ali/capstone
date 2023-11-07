@@ -22,6 +22,7 @@ import pkg_resources
 from symspellpy import SymSpell
 import matplotlib.pyplot as plt
 from spellchecker import SpellChecker
+import plotly.express as px
 
 def setup_func():
     with st.spinner("Downloading resources..."):
@@ -344,25 +345,44 @@ def datetime_layer(text):
     
     return timestamps
 
-def generate_visualizations_func(topic_model, timestamps, translated_text):
-    fig3 = topic_model.visualize_barchart()
-    st.write(fig3)    
-    fig1 = topic_model.visualize_hierarchy()
-    st.write(fig1) # Hierarchy Chart
-    fig2 = topic_model.visualize_topics()
-    st.write(fig2)
+def generate_topics_over_time_func(topic_model, timestamps, topics):
+    # Get topic representations from the pre-trained model
+            topic_info = topic_model.get_topic_info()
+            topic_names = topic_info['Name']
 
-    topics, probs = topic_model.fit_transform(translated_text)
-    topics_over_time = model.topics_over_time(translated_text, timestamps)
-    topic_model.visualize_topics_over_time(topics_over_time, topics=[9, 10, 72, 83, 87, 91])
+            # Convert timestamps to datetime objects
+            timestamps = pd.to_datetime(timestamps)
 
-    #approximate topic distribution
-    topic_distr, _ = topic_model.approximate_distribution(translated_text, min_similarity=0)
-    # To visualize the probabilities of topic assignment
-    topic_model.visualize_distribution(probs[0])
+            # Create a DataFrame with topics and timestamps
+            data = {'Timestamps': timestamps, 'Topics': topics}
+            data = pd.DataFrame(data)
 
-    # To visualize the topic distributions in a document
-    topic_model.visualize_distribution(topic_distr[0])
+            # Count the frequency of each topic for each timestamp
+            topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
+
+            # Streamlit app
+            st.title("Top 10 Topics Over Time (Interactive Line Chart)")
+
+            # Sidebar for filtering
+            unique_topics = sorted(data['Topics'].unique())
+            selected_topics = st.multiselect("Select Topics", unique_topics, unique_topics[:10])
+
+            # Filter and plot the selected topics as an interactive line chart
+            filtered_data = topic_frequencies[selected_topics]
+
+            # Reset index to make 'Timestamps' a regular column
+            filtered_data = filtered_data.reset_index()
+
+            # Melt the DataFrame to long format for Plotly Express
+            filtered_data_long = pd.melt(filtered_data, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
+
+            # Create an interactive line chart using Plotly Express
+            fig = px.line(filtered_data_long, x='Timestamps', y='Frequency', color='Topic',
+                        labels={'Timestamps': 'Year', 'Frequency': 'Frequency'},
+                        title="Top 10 Topics Over Time")
+            fig.update_xaxes(categoryorder='total ascending')
+
+            return fig
 
 def prove_success_func(topic_model):
     if topic_model is not None:
