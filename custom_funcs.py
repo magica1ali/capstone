@@ -345,10 +345,9 @@ def datetime_layer(text):
     
     return timestamps
 
-def generate_topics_over_time_func(topic_model, timestamps, topics):
+def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics):
     # Get topic representations from the pre-trained model
             topic_info = topic_model.get_topic_info()
-            topic_names = topic_info['Name']
 
             # Convert timestamps to datetime objects
             timestamps = pd.to_datetime(timestamps)
@@ -362,13 +361,6 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
 
             # Streamlit app
             st.title("Top 10 Topics Over Time (Interactive Line Chart)")
-
-            # Sidebar for filtering
-            unique_topics = sorted(data['Topics'].unique())
-            selected_topics = st.multiselect("Select Topics", unique_topics, unique_topics[:10])
-
-            # Filter and plot the selected topics as an interactive line chart
-            filtered_data = topic_frequencies[selected_topics]
 
             # Reset index to make 'Timestamps' a regular column
             filtered_data = filtered_data.reset_index()
