@@ -345,7 +345,7 @@ def datetime_layer(text):
     
     return timestamps
 
-def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics):
+def generate_topics_over_time_func(topic_model, timestamps, topics):
     # Get topic representations from the pre-trained model
             topic_info = topic_model.get_topic_info()
 
