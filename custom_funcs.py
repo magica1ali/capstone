@@ -345,8 +345,7 @@ def datetime_layer(text):
     
     return timestamps
 
-@st.cache
-def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics=10):
+def generate_topics_over_time_func(topic_model, timestamps, topics):
     # Get topic representations from the pre-trained model
     topic_info = topic_model.get_topic_info()
 
@@ -362,7 +361,7 @@ def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics=1
 
     # Sort topics by frequency and select the top 'n' topics
     sorted_topics = topic_frequencies.sum().sort_values(ascending=False)
-    selected_topics = sorted_topics.index[:num_topics]
+    selected_topics = sorted_topics.index[:10]
 
     # Filter and plot the selected topics as an interactive line chart
     filtered_data = topic_frequencies[selected_topics]

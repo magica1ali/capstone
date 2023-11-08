@@ -68,10 +68,6 @@ def main():
                 st.session_state.fig5 = custom_funcs.generate_topics_over_time_func(topic_model, timestamps, topics)
                 st.session_state.topic_info = topic_model.get_topic_info()
             
-            # Get topic representations from the pre-trained model
-           
-
-            
             custom_funcs.prove_success_func(topic_model)
 
 
