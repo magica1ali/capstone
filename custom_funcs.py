@@ -345,43 +345,50 @@ def datetime_layer(text):
     
     return timestamps
 
-def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics):
+@st.cache
+def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics=10):
     # Get topic representations from the pre-trained model
-            topic_info = topic_model.get_topic_info()
+    topic_info = topic_model.get_topic_info()
 
-            # Convert timestamps to datetime objects
-            timestamps = pd.to_datetime(timestamps)
+    # Convert timestamps to datetime objects
+    timestamps = pd.to_datetime(timestamps)
 
-            # Create a DataFrame with topics and timestamps
-            data = {'Timestamps': timestamps, 'Topics': topics}
-            data = pd.DataFrame(data)
+    # Create a DataFrame with topics and timestamps
+    data = {'Timestamps': timestamps, 'Topics': topics}
+    data = pd.DataFrame(data)
 
-            # Count the frequency of each topic for each timestamp
-            topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
+    # Count the frequency of each topic for each timestamp
+    topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
 
-            # Streamlit app
-            st.title("Top 10 Topics Over Time (Interactive Line Chart)")
+    # Streamlit app
+    st.title("Top Topics Over Time (Interactive Line Chart)")
 
-            # Sidebar for filtering
-            unique_topics = sorted(data['Topics'].unique())
-            selected_topics = st.multiselect("Select Topics", unique_topics, unique_topics[:num_topics])
+    # Create a slider widget to control the number of topics to include
+    num_topics = st.slider("Number of Topics to Include", 1, len(data['Topics'].unique()), num_topics)
 
-            # Filter and plot the selected topics as an interactive line chart
-            filtered_data = topic_frequencies[selected_topics]
+    # Sidebar for filtering
+    unique_topics = sorted(data['Topics'].unique())
+    
+    # Sort topics by frequency and select the top 'n' topics
+    sorted_topics = topic_frequencies.sum().sort_values(ascending=False)
+    selected_topics = sorted_topics.index[:num_topics]
 
-            # Reset index to make 'Timestamps' a regular column
-            filtered_data = filtered_data.reset_index()
+    # Filter and plot the selected topics as an interactive line chart
+    filtered_data = topic_frequencies[selected_topics]
 
-            # Melt the DataFrame to long format for Plotly Express
-            filtered_data_long = pd.melt(filtered_data, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
+    # Reset index to make 'Timestamps' a regular column
+    filtered_data = filtered_data.reset_index()
 
-            # Create an interactive line chart using Plotly Express
-            fig = px.line(filtered_data_long, x='Timestamps', y='Frequency', color='Topic',
-                        labels={'Timestamps': 'Year', 'Frequency': 'Frequency'},
-                        title="Top 10 Topics Over Time")
-            fig.update_xaxes(categoryorder='total ascending')
+    # Melt the DataFrame to long format for Plotly Express
+    filtered_data_long = pd.melt(filtered_data, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
 
-            return fig
+    # Create an interactive line chart using Plotly Express
+    fig = px.line(filtered_data_long, x='Timestamps', y='Frequency', color='Topic',
+                labels={'Timestamps': 'Year', 'Frequency': 'Frequency'},
+                title="Top Topics Over Time")
+    fig.update_xaxes(categoryorder='total ascending')
+
+    return fig
 
 def prove_success_func(topic_model):
     if topic_model is not None:
