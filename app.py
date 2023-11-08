@@ -56,9 +56,6 @@ def main():
                 st.write('Model fitted!')
                 
                 time.sleep(1)
-                
-                # custom_funcs.plot_topics_over_time(topic_model, translated_text, timestamps)
-                # custom_funcs.show_doc_info(topic_model, translated_text)
 
                 st.write('Creating Visualizations...')
                 status.update(label="Process complete!", state="complete", expanded=False)
