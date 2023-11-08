@@ -345,7 +345,7 @@ def datetime_layer(text):
     
     return timestamps
 
-def generate_topics_over_time_func(topic_model, timestamps, topics):
+def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics):
     # Get topic representations from the pre-trained model
             topic_info = topic_model.get_topic_info()
 
@@ -361,18 +361,22 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
 
             # Streamlit app
             st.title("Top 10 Topics Over Time (Interactive Line Chart)")
-            
-            # Create a slider widget to control the number of lines
-            num_lines = st.slider('Number of Lines', min_value=1, max_value=topic_frequencies.shape[1], value=1)
 
-            # Create a pandas DataFrame from the crosstab data
-            line_data = topic_frequencies.iloc[:, :num_lines]
+            # Sidebar for filtering
+            unique_topics = sorted(data['Topics'].unique())
+            selected_topics = st.multiselect("Select Topics", unique_topics, unique_topics[:num_topics])
+
+            # Filter and plot the selected topics as an interactive line chart
+            filtered_data = topic_frequencies[selected_topics]
+
+            # Reset index to make 'Timestamps' a regular column
+            filtered_data = filtered_data.reset_index()
 
             # Melt the DataFrame to long format for Plotly Express
-            topic_frequencies_long = pd.melt(topic_frequencies, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
+            filtered_data_long = pd.melt(filtered_data, id_vars=['Timestamps'], var_name='Topic', value_name='Frequency')
 
             # Create an interactive line chart using Plotly Express
-            fig = px.line(topic_frequencies_long, x='Timestamps', y='Frequency', color='Topic',
+            fig = px.line(filtered_data_long, x='Timestamps', y='Frequency', color='Topic',
                         labels={'Timestamps': 'Year', 'Frequency': 'Frequency'},
                         title="Top 10 Topics Over Time")
             fig.update_xaxes(categoryorder='total ascending')
