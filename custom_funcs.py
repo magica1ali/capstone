@@ -360,9 +360,6 @@ def generate_topics_over_time_func(topic_model, timestamps, topics, num_topics=1
     # Count the frequency of each topic for each timestamp
     topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
 
-    # Create a slider widget to control the number of topics to include
-    num_topics = st.slider("Number of Topics to Include", 1, len(data['Topics'].unique()), num_topics)
-    
     # Sort topics by frequency and select the top 'n' topics
     sorted_topics = topic_frequencies.sum().sort_values(ascending=False)
     selected_topics = sorted_topics.index[:num_topics]
