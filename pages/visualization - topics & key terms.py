@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.title("BerTopic Visualizations : Topics & Key terms")
-st.heading("These visualizations provide a view into the individual topic contents and help the user accurately label topics.")
+st.header("These visualizations provide a view into the individual topic contents and help the user accurately label topics.")
 
 st.header("Topic Information")
 st.write("This easily expadable spreadsheet view allows the user to view the contents of each topic, sorted by the topic relevance within the collection of texts. Topics have a name and representations, which is a set of words that best defines the topic. The representations must be interpreted for the topic to be meaningful.")
