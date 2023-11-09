@@ -12,6 +12,7 @@ import csv
 from spellchecker import SpellChecker
 import plotly.express as px
 
+@st.cache_data
 def setup_func():
     with st.spinner("Downloading resources..."):
         try:
@@ -28,6 +29,7 @@ def setup_func():
             st.empty()  # Clear the spinner
 
 #define pdf reading function
+@st.cache_data
 def process_pdfs(uploaded_files):
     text_dict = {}
 
@@ -52,6 +54,7 @@ def process_pdfs(uploaded_files):
     return text_dict
 
 #define function to extract reocmmendations section from each PDF
+@st.cache_data
 def parse_clean_func(text_dict):
     # Sample list of document texts
     extracted_sections = {}
@@ -311,6 +314,7 @@ def parse_clean_func(text_dict):
 
  
 #Extracts timestamps for topics over time visulization
+@st.cache_data
 def datetime_layer(text):
           
     # Create a list of dictionaries with 'sentence' and 'date' attributes
@@ -333,6 +337,7 @@ def datetime_layer(text):
     
     return timestamps
 
+@st.cache_data
 def generate_topics_over_time_func(topic_model, timestamps, topics):
     # Get topic representations from the pre-trained model
     topic_info = topic_model.get_topic_info()
@@ -368,6 +373,7 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
 
     return fig
 
+@st.cache_data
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")
