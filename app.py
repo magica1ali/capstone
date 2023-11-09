@@ -21,11 +21,11 @@ def main():
         r = requests.get(url)
         return BytesIO(r.content)
     
-    st.image(get_image(), caption="Hoya Saxa!")
+    st.image(get_image(),)
     
     st.title("PDF Topic Modeling Tool")
     st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
-    st.write("By Saxa Capstone Team 3: Matthew Booth, Aarika Cox, Mike Halsema, Ali Mohamed, Logan Suba, and Su Tellakat")
+    st.subheader("By Saxa Capstone Team 3: \nMatthew Booth, Aarika Cox, Mike Halsema, Ali Mohamed, Logan Suba, and Su Tellakat")
 
     uploaded_files = st.file_uploader("Upload one or more PDF files", type=["pdf"], accept_multiple_files=True)
     
