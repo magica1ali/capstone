@@ -71,10 +71,10 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
             
                 st.session_state.fig0 = topic_model.get_topic_info()
-                st.session_state.fig1 = topic_model.visualize_hierarchy(top_n_topics = 10)
-                st.session_state.fig2 = topic_model.visualize_topics(top_n_topics = 10)
-                st.session_state.fig3 = topic_model.visualize_heatmap(top_n_topics = 10)
-                st.session_state.fig4 = topic_model.visualize_barchart(top_n_topics = 10)
+                st.session_state.fig1 = topic_model.visualize_hierarchy()
+                st.session_state.fig2 = topic_model.visualize_topics()
+                st.session_state.fig3 = topic_model.visualize_heatmap()
+                st.session_state.fig4 = topic_model.visualize_barchart()
                 st.session_state.fig5 = custom_funcs.generate_topics_over_time_func(topic_model, timestamps, topics)
             
             custom_funcs.prove_success_func(topic_model)
