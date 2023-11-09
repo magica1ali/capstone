@@ -1,11 +1,4 @@
 import streamlit as st
-import time
-import custom_funcs
-import nltk
-import spacy
-from bertopic import BERTopic
-import matplotlib.pyplot as plt
-from sentence_transformers import SentenceTransformer
 
 st.title("BerTopic Visualizations : Topics & Key terms")
 st.heading("These visualizations provide a view into the individual topic contents and help the user accurately label topics.")

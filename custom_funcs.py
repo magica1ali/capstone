@@ -2,8 +2,6 @@ import streamlit as st
 import datetime
 import pandas as pd
 import nltk
-from sklearn.feature_extraction.text import CountVectorizer
-import spacy
 import re
 import fitz
 import csv
@@ -11,16 +9,6 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import csv
-from umap import UMAP
-from hdbscan import HDBSCAN
-from sentence_transformers import SentenceTransformer
-from sklearn.feature_extraction.text import CountVectorizer
-from bertopic import BERTopic
-from bertopic.representation import KeyBERTInspired
-from bertopic.vectorizers import ClassTfidfTransformer
-import pkg_resources
-from symspellpy import SymSpell
-import matplotlib.pyplot as plt
 from spellchecker import SpellChecker
 import plotly.express as px
 

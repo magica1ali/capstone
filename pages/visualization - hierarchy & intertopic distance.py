@@ -1,11 +1,4 @@
 import streamlit as st
-import time
-import custom_funcs
-import nltk
-import spacy
-from bertopic import BERTopic
-import matplotlib.pyplot as plt
-from sentence_transformers import SentenceTransformer
 
 st.title("BerTopic Visualizations : Topic Relationships")
 st.header("These charts show how the topics relate to one another")

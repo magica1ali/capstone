@@ -3,10 +3,7 @@ import pandas as pd
 import numpy as np 
 import time
 import custom_funcs
-import nltk
-import spacy
 from bertopic import BERTopic
-import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
 
 def main():
