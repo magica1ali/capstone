@@ -372,7 +372,6 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
 
     return fig
 
-@st.cache_data
 def prove_success_func(topic_model):
     if topic_model is not None:
         st.write("Topic Model generated successfully.")
