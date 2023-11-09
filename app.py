@@ -17,11 +17,11 @@ def main():
     #Import lovely Georgetown University logo
     @st.cache_data
     def get_image():
-        url = "https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Vertical_Logo.png"
+        url = "https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"
         r = requests.get(url)
         return BytesIO(r.content)
     
-    st.image(get_image(),)
+    st.image(get_image(),width=1200)
     
     st.title("PDF Topic Modeling Tool")
     st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
