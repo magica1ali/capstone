@@ -17,7 +17,7 @@ def main():
     #Import lovely Georgetown University logo
     @st.cache_data
     def get_image():
-        url = "https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"
+        url = "https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Vertical_Logo.png"
         r = requests.get(url)
         return BytesIO(r.content)
     
