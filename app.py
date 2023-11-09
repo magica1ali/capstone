@@ -14,7 +14,7 @@ def main():
 
 
     #Import lovely Georgetown University logo
-    image = Image.open('./data/gu_msob.vert_rgb.png')
+    image = Image.open('https://msb.georgetown.edu/wp-content/uploads/2022/06/gu_msob.vert_rgb.jpg')
     st.image(image, caption='Hoya Saxa!')
     
     st.title("PDF Topic Modeling Tool")
