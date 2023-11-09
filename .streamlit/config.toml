@@ -1,9 +1,9 @@
 # Streamlit Configuration
 
 [theme] # You have to add this line
-primaryColor = "#3498db"
-backgroundColor = "#ecf0f1"
-secondaryBackgroundColor = "#5DADE2"
-textColor = "#ffffff"
+primaryColor = "#1f77b4"  # Darker blue
+backgroundColor = "#2c3e50"  # Dark background
+secondaryBackgroundColor = "#34495e"  # Slightly lighter background
+textColor = "#ecf0f1"  # Light text color
 font = "Roboto"
 
