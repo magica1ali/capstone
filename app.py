@@ -21,7 +21,7 @@ def main():
         r = requests.get(url)
         return BytesIO(r.content)
     
-    st.image(get_image(),width=1200)
+    st.image(get_image(),width=700)
     
     st.title("PDF Topic Modeling Tool")
     st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
