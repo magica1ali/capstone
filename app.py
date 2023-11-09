@@ -12,12 +12,14 @@ def main():
     st.set_page_config(page_title="PDF Topic Modeling Tool",layout="wide")
     #Import lovely Georgetown University logo
     @st.cache_data
-    def get_image():
-        url = "https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"
+    def get_image(url):
         r = requests.get(url)
         return BytesIO(r.content)
     
-    st.image(get_image(),width=700)
+    st.image(get_image("https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"),width=700)
+    st.image(get_image("https://pnghut.com/png/PvinfTZQH9/united-states-department-of-veterans-affairs-police-benefits-administration-logo-transparent-png"),width=350)
+    
+
     
     st.title("PDF Topic Modeling Tool")
     st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
