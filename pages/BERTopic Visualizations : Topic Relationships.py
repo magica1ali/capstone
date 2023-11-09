@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("BerTopic Visualizations : Topic Relationships")
+st.title("BERTopic Visualizations : Topic Relationships")
 st.header("These charts show how the topics relate to one another")
 
 st.header("Topic Hierarchy Chart")

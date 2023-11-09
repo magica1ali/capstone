@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("BerTopic Visualizations : Topics & Key terms")
+st.title("BERTopic Visualizations: Topics & Key terms")
 st.header("These visualizations provide a view into the individual topic contents and help the user accurately label topics.")
 
 st.header("Topic Information")
