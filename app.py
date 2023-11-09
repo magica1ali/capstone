@@ -8,14 +8,21 @@ import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 import plotly.express as px
-from PIL import Image
+from io import BytesIO
+import requests
 
 def main():
 
 
     #Import lovely Georgetown University logo
-    image = Image.open('https://msb.georgetown.edu/wp-content/uploads/2022/06/gu_msob.vert_rgb.jpg')
-    st.image(image, caption='Hoya Saxa!')
+    
+    @st.cache_data
+    def get_image():
+        url = "https://msb.georgetown.edu/wp-content/uploads/2022/06/gu_msob.vert_rgb.jpg"
+        r = requests.get(url)
+        return BytesIO(r.content)
+    
+    st.image(get_image(), caption="Hoya Saxa!")
     
     st.title("PDF Topic Modeling Tool")
     st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
