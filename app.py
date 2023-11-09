@@ -14,6 +14,8 @@ import requests
 def main():
 
 
+    st.set_page_config(page_title="PDF Topic Modeling Tool")
+    st.set_page_config(layout="wide")
     #Import lovely Georgetown University logo
     @st.cache_data
     def get_image():
