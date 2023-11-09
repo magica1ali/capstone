@@ -1,13 +1,8 @@
 import streamlit as st
 import time
 import custom_funcs
-import nltk
-import spacy
 from bertopic import BERTopic
-import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
-import pandas as pd
-import plotly.express as px
 from io import BytesIO
 import requests
 
