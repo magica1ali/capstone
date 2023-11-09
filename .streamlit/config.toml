@@ -3,18 +3,5 @@
 [theme] # You have to add this line
 primaryColor = '#FF8C02' # Bright Orange
 backgroundColor = '#00325B' # Dark Blue
-
 secondaryBackgroundColor = '#55B2FF' # Lighter Blue
 
-[server]
-# Add any other server configurations here
-
-[runner]
-# Add any configurations related to the runner here
-
-[logger]
-# Add any logger configurations here
-
-[client]
-caching = true
-# Add any client configurations here
