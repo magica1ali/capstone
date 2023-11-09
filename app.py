@@ -16,8 +16,8 @@ def main():
         r = requests.get(url)
         return BytesIO(r.content)
     
-    st.image(get_image("https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"),width=350)
-    st.image(get_image("https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/header-logo.png"),width=350)
+    st.image(get_image("https://msb.georgetown.edu/wp-content/uploads/2022/08/GU_MSB_Transparent_Horizontal_Logo.png"),width=500)
+    st.image(get_image("https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/header-logo.png"),width=500)
     
 
     
