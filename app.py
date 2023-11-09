@@ -8,10 +8,18 @@ import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 import plotly.express as px
+from PIL import Image
 
 def main():
 
-    st.title("PDF Text Extraction")
+
+    #Import lovely Georgetown University logo
+    image = Image.open('.\data\gu_msob.vert_rgb.png')
+    st.image(image, caption='Hoya Saxa!')
+    
+    st.title("PDF Topic Modeling Tool")
+    st.header("Designed for the Advisory Committee on Women Veterans - U.S. Dept. of Veterans Affairs")
+    st.write("By Saxa Capstone Team 3: Matthew Booth, Aarika Cox, Mike Halsema, Ali Mohamed, Logan Suba, and Su Tellakat")
 
     uploaded_files = st.file_uploader("Upload one or more PDF files", type=["pdf"], accept_multiple_files=True)
     
@@ -61,12 +69,11 @@ def main():
                 status.update(label="Process complete!", state="complete", expanded=False)
             
                 st.session_state.fig0 = topic_model.get_topic_info()
-                st.session_state.fig1 = topic_model.visualize_hierarchy()
-                st.session_state.fig2 = topic_model.visualize_topics()
-                st.session_state.fig3 = topic_model.visualize_heatmap()
-                st.session_state.fig4 = topic_model.visualize_barchart()
+                st.session_state.fig1 = topic_model.visualize_hierarchy(top_n_topics = 10)
+                st.session_state.fig2 = topic_model.visualize_topics(top_n_topics = 10)
+                st.session_state.fig3 = topic_model.visualize_heatmap(top_n_topics = 10)
+                st.session_state.fig4 = topic_model.visualize_barchart(top_n_topics = 10)
                 st.session_state.fig5 = custom_funcs.generate_topics_over_time_func(topic_model, timestamps, topics)
-                st.session_state.topic_info = topic_model.get_topic_info()
             
             custom_funcs.prove_success_func(topic_model)
 
