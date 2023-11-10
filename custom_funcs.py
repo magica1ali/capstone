@@ -344,9 +344,11 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
     # Convert timestamps to datetime objects
     timestamps = pd.to_datetime(timestamps)
 
-    # Create a DataFrame with topics and timestamps
-    data = {'Timestamps': timestamps, 'Topics': topics}
-    data = pd.DataFrame(data)
+    # Merge with the topic_info DataFrame to get topic names
+    data = pd.merge(data, topic_info[['topic', 'topic_name']], left_on='Topics', right_on='topic', how='left')
+
+    # Use the 'topic_name' column as the final topic names
+    data['Topics'] = data['topic_name']
 
     # Count the frequency of each topic for each timestamp
     topic_frequencies = pd.crosstab(index=data['Timestamps'], columns=data['Topics'])
