@@ -350,7 +350,7 @@ def generate_topics_over_time_func(topic_model, timestamps, topics):
 
     # Merge with the topic_info DataFrame to get topic names
     topic_info_subset = topic_info[['Topic', 'Name']]  # Select relevant columns
-    data = pd.merge(data, topic_info_subset, left_on='Topics', right_on='topic', how='left')
+    data = pd.merge(data, topic_info_subset, left_on='Topics', right_on='Topic', how='left')
 
     # Use the 'topic_name' column as the final topic names
     data['Topics'] = data['Name']
