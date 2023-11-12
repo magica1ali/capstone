@@ -8,5 +8,5 @@ st.write("This easily expadable spreadsheet view allows the user to view the con
 st.write(st.session_state.fig0) # Topic Information 
 
 st.header("Topic Word Scores Bar charts")
-st.write("These bar charts show the top 5 words of the top 10 topics, in order of relevance to the topic. This allows the user to further hone in on what the topics mean.")
+st.write("These bar charts show the top 5 words of the topics, in order of relevance to the topic. This allows the user to further hone in on what the topics mean.")
 st.write(st.session_state.fig4) # visualize the selected terms for a few topics
